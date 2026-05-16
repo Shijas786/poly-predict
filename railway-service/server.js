@@ -41,23 +41,25 @@ app.use((req, res, next) => {
 // ── Fetch + persist new rounds ────────────────────────────────────────────────
 async function fetchAndStore() {
   try {
-    console.log(`[${new Date().toISOString()}] Fetching from Polymarket…`);
+    console.log(`[${new Date().toISOString()}] Syncing with Polymarket…`);
     const resp = await fetch(
-      `${GAMMA}/events?series_slug=btc-up-or-down-5m&limit=500&order=startDate&ascending=false`
+      `${GAMMA}/events?series_slug=btc-up-or-down-5m&limit=500&order=endDate&ascending=false`
     );
     if (!resp.ok) throw new Error(`Upstream ${resp.status}`);
     const events = await resp.json();
 
-    // Filter only resolved rounds
+    // Filter only resolved rounds (one side must be > 0.9 or < 0.1)
     const resolved = events.filter(ev => {
       try {
-        const prices = JSON.parse(ev.markets?.[0]?.outcomePrices || '[]');
+        const m = ev.markets?.[0];
+        if (!m || !m.closed) return false;
+        const prices = JSON.parse(m.outcomePrices || '[]');
         return parseFloat(prices[0]) > 0.9 || parseFloat(prices[1]) > 0.9;
       } catch { return false; }
     });
 
-    // Upsert into DB — ignore duplicates by slug
     let newCount = 0;
+
     for (const ev of resolved) {
       const prices = JSON.parse(ev.markets?.[0]?.outcomePrices || '[]');
       const upPrice = parseFloat(prices[0]) || 0.5;
