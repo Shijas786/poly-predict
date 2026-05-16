@@ -1,0 +1,17 @@
+{
+  "name": "pp-pulse-api",
+  "version": "1.0.0",
+  "description": "Polymarket Pulse — Railway caching API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "node-cron": "^3.0.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
