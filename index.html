@@ -535,9 +535,10 @@ async function fetchRound(ev,W,rk){
 }
 
 async function init(){
-  setStatus('Fetching 50 resolved rounds…');setP(0);
-  const evs=await fetch(`${GA}/events?series_slug=btc-up-or-down-5m&limit=60&order=startDate&ascending=false`).then(r=>r.json()).catch(()=>[]);
-  const res=evs.filter(ev=>{try{const a=JSON.parse(ev.markets?.[0]?.outcomePrices||'[]');return parseFloat(a[0])>.9||parseFloat(a[1])>.9;}catch{return false;}}).slice(0,50);
+  setStatus('Fetching resolved rounds…');setP(0);
+  // Try our cached /api/rounds proxy first (limit=500), fall back to gamma direct
+  const evs=await fetch('/api/rounds').then(r=>r.ok?r.json():fetch(`${GA}/events?series_slug=btc-up-or-down-5m&limit=500&order=startDate&ascending=false`).then(r=>r.json())).catch(()=>fetch(`${GA}/events?series_slug=btc-up-or-down-5m&limit=500&order=startDate&ascending=false`).then(r=>r.json()).catch(()=>[]));
+  const res=evs.filter(ev=>{try{const a=JSON.parse(ev.markets?.[0]?.outcomePrices||'[]');return parseFloat(a[0])>.9||parseFloat(a[1])>.9;}catch{return false;}}).slice(0,100);
   document.getElementById('k-r').textContent=res.length;
   setStatus(`Building wallet profiles…`);
   G.wallets=await buildWallets(res);
