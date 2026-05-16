@@ -1,7 +1,7 @@
 {
   "name": "pp-pulse-api",
-  "version": "1.0.0",
-  "description": "Polymarket Pulse — Railway caching API",
+  "version": "2.0.0",
+  "description": "Polymarket Pulse — Railway caching API with Postgres persistence",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "express": "^4.19.2",
-    "node-cron": "^3.0.3"
+    "node-cron": "^3.0.3",
+    "pg": "^8.11.3"
   },
   "engines": {
     "node": ">=18"

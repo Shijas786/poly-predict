@@ -378,7 +378,7 @@ api.binance.com/api/v3/klines    → BTC candle data</pre></div></div>
 
 <script>
 const DA='https://data-api.polymarket.com',GA='https://gamma-api.polymarket.com';
-let G={wallets:{},rounds:[],strats:[]};
+let G={wallets:{},rounds:[],strats:[],calRounds:[]};
 let calY=new Date().getFullYear(),calM=new Date().getMonth();
 let selDay=null,selStratId=null;
 let stratSort='wr',stratFilter=null,expId=null;
@@ -535,19 +535,36 @@ async function fetchRound(ev,W,rk){
 }
 
 const RAILWAY_API='https://pp-pulse-api-production.up.railway.app';
+
 async function init(){
-  setStatus('Fetching resolved rounds…');setP(0);
-  // Railway API (5-min cached, limit=500) → fallback to Vercel proxy → fallback to gamma direct
-  const evs=await fetch(`${RAILWAY_API}/rounds`).then(r=>r.ok?r.json():null).catch(()=>null)
-    || await fetch('/api/rounds').then(r=>r.ok?r.json():null).catch(()=>null)
-    || await fetch(`${GA}/events?series_slug=btc-up-or-down-5m&limit=500&order=startDate&ascending=false`).then(r=>r.json()).catch(()=>[]);
-  const res=(Array.isArray(evs)?evs:[]).filter(ev=>{try{const a=JSON.parse(ev.markets?.[0]?.outcomePrices||'[]');return parseFloat(a[0])>.9||parseFloat(a[1])>.9;}catch{return false;}}).slice(0,100);
-  document.getElementById('k-r').textContent=res.length;
-  setStatus(`Building wallet profiles…`);
-  G.wallets=await buildWallets(res);
+  setStatus('Loading data…');setP(0);
+
+  // ── 1. Historical rounds from DB (all time) → for calendar ──────────────
+  setStatus('Loading history from DB…');setP(5);
+  const dbRows=await fetch(`${RAILWAY_API}/rounds`).then(r=>r.ok?r.json():[]).catch(()=>[]);
+  // Normalize DB rows: date comes as ISO string, need Date object
+  G.calRounds=dbRows.map(r=>({
+    slug:r.slug,oc:r.outcome,uP:parseFloat(r.upP)||.5,
+    ts:parseInt(r.ts)||0,
+    date:new Date(r.date),
+  })).filter(r=>r.oc==='UP'||r.oc==='DOWN');
+
+  // ── 2. Live rounds from Polymarket (last ~100 resolved) → for strategies/wallets ──
+  setStatus('Fetching live rounds from Polymarket…');setP(10);
+  const liveEvs=await fetch(`${GA}/events?series_slug=btc-up-or-down-5m&limit=500&order=startDate&ascending=false`).then(r=>r.json()).catch(()=>[]);
+  const liveRes=(Array.isArray(liveEvs)?liveEvs:[]).filter(ev=>{try{const a=JSON.parse(ev.markets?.[0]?.outcomePrices||'[]');return parseFloat(a[0])>.9||parseFloat(a[1])>.9;}catch{return false;}}).slice(0,100);
+
+  // Update KPIs
+  const totalRounds=Math.max(G.calRounds.length,liveRes.length);
+  document.getElementById('k-r').textContent=G.calRounds.length||liveRes.length;
+
+  // ── 3. Build wallets from live data ──────────────────────────────────────
+  setStatus('Building wallet profiles…');setP(15);
+  G.wallets=await buildWallets(liveRes);
   const wc=Object.keys(G.wallets).length;
   document.getElementById('k-w').textContent=wc;
   setP(42);
+
   const byWR=Object.values(G.wallets).sort((a,b)=>b.wr-a.wr);
   const byPnL=Object.values(G.wallets).sort((a,b)=>b.pnl-a.pnl);
   const rk={
@@ -556,10 +573,15 @@ async function init(){
     or:Object.values(G.wallets).filter(w=>w.lateWr>=65&&w.lateR>=3).map(w=>w.addr),
     mn:Object.values(G.wallets).filter(w=>w.avgTiming<60&&w.wr>=55&&w.rounds>=5).map(w=>w.addr),
   };
-  setStatus('Fetching round data…');setP(45);
+
+  setStatus('Fetching trade data…');setP(45);
   let done2=0;
-  const rdArr=await Promise.all(res.map(async ev=>{const d=await fetchRound(ev,G.wallets,rk);done2++;setP(45+done2/res.length*35);return d;}));
+  const rdArr=await Promise.all(liveRes.map(async ev=>{const d=await fetchRound(ev,G.wallets,rk);done2++;setP(45+done2/liveRes.length*35);return d;}));
   G.rounds=rdArr.filter(Boolean).reverse();
+
+  // Use DB calendar rounds if available, otherwise fall back to live rounds
+  if(G.calRounds.length===0)G.calRounds=[...G.rounds];
+
   const outs=G.rounds.map(r=>r.oc);
   setStatus('Running strategies…');setP(82);
   G.strats=STRATS.map(st=>{
@@ -576,8 +598,10 @@ async function init(){
   const best=Math.max(...G.strats.map(s=>s.wr));
   document.getElementById('k-b').textContent=best+'%';
   document.getElementById('k-s').textContent=G.strats.length;
-  setP(100);setStatus(`✅ ${res.length} rounds · ${wc} wallets · ${G.strats.length} strategies · ${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`);
+  setP(100);
+  setStatus(`✅ ${G.calRounds.length} rounds in DB · ${wc} wallets · ${G.strats.length} strategies · ${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}`);
   renderStrategies();renderWallets();renderCalendar();buildCalSidebar();renderBuckets();
+
 }
 
 // ── STRATEGIES ────────────────────────────────────────────────────────────────
@@ -661,7 +685,9 @@ function renderCalendar(){
 
   // Build day map
   const dayMap={};
-  G.rounds.forEach(r=>{
+  // Use full DB history for calendar, fall back to live rounds
+  const calData=G.calRounds.length>0?G.calRounds:G.rounds;
+  calData.forEach(r=>{
     const d=r.date;
     if(d.getFullYear()===calY&&d.getMonth()===calM){
       const k=d.getDate();if(!dayMap[k])dayMap[k]=[];dayMap[k].push(r);
