@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Polymarket Pulse · Intelligence Dashboard v2</title>
+<title>Polymarket Pulse · Intelligence Dashboard v2.1</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -89,54 +89,6 @@ body{background:var(--bg);color:var(--tx);font-family:'Inter',sans-serif;font-si
 .sc-why{padding:0 12px 8px;font-size:9.5px;color:var(--pu);font-style:italic;line-height:1.4}
 .sc-hist{display:none;border-top:1px solid var(--bd);max-height:200px;overflow-y:auto}
 .sc.open .sc-hist{display:block}
-.sh-hdr{display:grid;grid-template-columns:40px 32px 32px 1fr 46px;gap:4px;padding:5px 12px;background:var(--sf2);font-size:8.5px;color:var(--tx3);text-transform:uppercase;letter-spacing:.07em;font-weight:600;border-bottom:1px solid var(--bd);font-family:var(--mono)}
-.sh-row{display:grid;grid-template-columns:40px 32px 32px 1fr 46px;gap:4px;padding:3px 12px;border-bottom:1px solid var(--sf2);font-family:var(--mono);font-size:9.5px;align-items:center}
-.sh-row:hover{background:var(--sf2)}.sh-row:last-child{border:none}
-.win{color:var(--up);font-weight:700}.loss{color:var(--dn);font-weight:700}.skip-c{color:var(--tx3)}
-
-/* CALENDAR */
-.cal-wrap{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);display:flex;flex-direction:column;min-height:700px;box-shadow:var(--sh)}
-.cal-h{padding:16px 24px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between}
-.cal-title{font-size:18px;font-weight:800;letter-spacing:-0.01em}
-.cal-nav{display:flex;gap:6px}
-.cal-grid-wrap{display:flex;flex:1;overflow:hidden}
-.cal-sidebar{width:280px;border-right:1px solid var(--bd);background:var(--sf2);display:flex;flex-direction:column}
-.cal-sb-h{padding:12px 16px;border-bottom:1px solid var(--bd);font-size:11px;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:0.05em}
-.cal-sb-search{padding:10px 16px;border-bottom:1px solid var(--bd)}
-.cal-sb-search input{width:100%;padding:6px 10px;border:1px solid var(--bd);border-radius:6px;font-size:12px;outline:none}
-.cal-sb-list{flex:1;overflow-y:auto;padding:8px 0}
-.cal-sb-group{padding:10px 16px 4px;font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase}
-.cal-sb-item{padding:8px 16px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.1s}
-.cal-sb-item:hover{background:var(--sf3)}
-.cal-sb-item.on{background:var(--bl-l);border-right:3px solid var(--bl)}
-.cal-sb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.cal-sb-item span{font-size:12px;font-weight:500;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cal-sb-wr{font-family:var(--mono);font-size:11px;font-weight:700}
-.cal-main{flex:1;display:flex;flex-direction:column}
-.cal-days{display:grid;grid-template-columns:repeat(7,1fr);background:var(--sf2);border-bottom:1px solid var(--bd)}
-.cal-day-label{padding:10px;text-align:center;font-size:10px;font-weight:700;color:var(--tx3);text-transform:uppercase}
-.cal-cells{display:grid;grid-template-columns:repeat(7,1fr);flex:1}
-.cc{border-right:1px solid var(--bd);border-bottom:1px solid var(--bd);padding:8px;min-height:100px;display:flex;flex-direction:column;gap:4px;cursor:pointer;transition:all 0.1s;position:relative}
-.cc:nth-child(7n){border-right:none}
-.cc:hover{background:var(--sf2)}
-.cc.empty{background:var(--sf3);cursor:default}
-.cc.today{border:2px solid var(--bl);z-index:10}
-.cc.sel{background:var(--bl-l)}
-.cc.no-data{opacity:0.5}
-.cc-day{font-size:11px;font-weight:700;color:var(--tx3)}
-.today-num{color:var(--bl);font-weight:900}
-.cc-bars{height:4px;border-radius:2px;overflow:hidden;display:flex;margin-top:auto}
-.cc-bar-up{background:var(--up)}
-.cc-bar-dn{background:var(--dn)}
-.cc-rounds{display:flex;flex-wrap:wrap;gap:2px;margin-top:4px}
-.cc-r{width:5px;height:5px;border-radius:50%}
-.cc-r.up{background:var(--up)}
-.cc-r.down{background:var(--dn)}
-.cc-stats{font-size:9px;font-weight:600;color:var(--tx3);margin-top:4px}
-.cc-strat{font-size:9px;font-weight:700;padding:2px 4px;border-radius:3px;text-align:center;margin-top:2px}
-.s-win{background:var(--up-l);color:var(--up)}
-.s-loss{background:var(--dn-l);color:var(--dn)}
-.s-skip{background:var(--sf3);color:var(--tx3)}
 
 /* TABLE */
 .table-wrap{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
@@ -149,40 +101,7 @@ tr:last-child td{border-bottom:none}
 .waddr{color:var(--bl);font-weight:600;cursor:pointer}
 .waddr:hover{text-decoration:underline}
 
-/* DAY PANEL */
-.day-panel{padding:16px;background:var(--sf);border-top:1px solid var(--bd)}
-.dp-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.dp-title{font-size:16px;font-weight:800}
-.dp-summary{display:flex;gap:20px}
-.dp-stat{text-align:center}
-.dp-sv{font-size:18px;font-weight:800;line-height:1}
-.dp-sl{font-size:9px;color:var(--tx3);text-transform:uppercase;margin-top:2px}
-.dp-timeline{margin-bottom:12px;overflow-x:auto;padding-bottom:8px}
-.dp-tl-inner{display:flex;gap:4px}
-.dp-tl-block{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:32px}
-.dp-tl-bar{width:100%;height:24px;border-radius:4px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:11px}
-.dp-tl-bar.up{background:var(--up)}
-.dp-tl-bar.down{background:var(--dn)}
-.dp-tl-time{font-size:8.5px;color:var(--tx3);font-family:var(--mono)}
-.dp-rounds{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px}
-.dp-round{padding:6px 10px;border-radius:6px;display:flex;justify-content:space-between;font-family:var(--mono);font-size:11px;font-weight:600}
-.dpr-up{background:var(--up-l);color:var(--up-d);border:1px solid var(--up-b)}
-.dpr-down{background:var(--dn-l);color:var(--dn-d);border:1px solid var(--dn-b)}
-.dp-strat-result{font-size:10px;margin-left:4px}
-.dsr-w{color:var(--up)}
-.dsr-l{color:var(--dn)}
-.dp-close{padding:4px 8px;border:none;background:var(--sf2);cursor:pointer;border-radius:4px;font-weight:800}
-
-/* BUCKETS */
-.bg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
-.bc{background:var(--sf);border:1px solid var(--bd);border-radius:var(--r);overflow:hidden;box-shadow:var(--sh)}
-.bc-head{padding:12px;background:var(--sf2);border-bottom:1px solid var(--bd);display:flex;justify-content:space-between;align-items:center}
-.bc-title{font-weight:800;font-size:13px}
-.bc-body{padding:12px}
-.bc-row{display:flex;justify-content:space-between;padding:4px 0;font-size:11px;border-bottom:1px solid var(--sf2)}
-.bc-row:last-child{border:none}
-
-/* ELITE TAG */
+/* TAGS */
 .tag-elite{background:var(--pu-l);color:var(--pu);border:1px solid #ddd6fe;font-size:8.5px;padding:1px 5px;border-radius:3px;font-weight:800;margin-left:4px}
 </style>
 </head>
@@ -192,7 +111,6 @@ tr:last-child td{border-bottom:none}
   <div class="nav-logo">POLYMARKET <span>PULSE v2</span></div>
   <div class="nav-tabs">
     <button class="nt on" onclick="sw('strategies',this)">Strategies</button>
-    <button class="nt" onclick="sw('calendar',this)">Calendar</button>
     <button class="nt" onclick="sw('wallets',this)">Wallets</button>
     <button class="nt" onclick="sw('buckets',this)">Buckets</button>
   </div>
@@ -204,9 +122,8 @@ tr:last-child td{border-bottom:none}
 <div class="pbar-wrap"><div class="pbar" id="prog"></div></div>
 
 <div class="content">
-  <!-- STATUS BAR -->
   <div class="status-bar">
-    <div class="stxt" id="status">Initializing intelligence engine...</div>
+    <div class="stxt" id="status">Initializing...</div>
     <div class="kpis">
       <div class="kpi"><div class="kv" id="k-r">—</div><div class="kl">Rounds</div></div>
       <div class="kpi"><div class="kv" id="k-s">—</div><div class="kl">Strats</div></div>
@@ -214,7 +131,6 @@ tr:last-child td{border-bottom:none}
     </div>
   </div>
 
-  <!-- STRATEGIES -->
   <div class="sec on" id="tab-strategies">
     <div class="tb">
       <span class="tbl">Filter:</span>
@@ -222,76 +138,30 @@ tr:last-child td{border-bottom:none}
       <button class="btn" onclick="sf('vol',this)">Volume</button>
       <button class="btn" onclick="sf('price',this)">Price</button>
       <button class="btn" onclick="sf('wallet',this)">Wallet</button>
-      <button class="btn" onclick="sf('streak',this)">Streak</button>
-      <button class="btn" onclick="sf('pattern',this)">Pattern</button>
+      <button class="btn" onclick="sf('time',this)">Time</button>
       <span class="tbl" style="margin-left:12px">Sort:</span>
       <button class="btn on" onclick="ss('wr',this)">Win Rate ↓</button>
       <button class="btn" onclick="ss('sig',this)">Signals</button>
-      <button class="btn" onclick="ss('name',this)">Name</button>
     </div>
     <div class="sg" id="strat-grid"></div>
   </div>
 
-  <!-- CALENDAR -->
-  <div class="sec" id="tab-calendar">
-    <div class="cal-wrap">
-      <div class="cal-h">
-        <div class="cal-title" id="cal-title">Month Year</div>
-        <div class="cal-nav">
-          <button class="btn" onclick="calNav(-1)">Prev</button>
-          <button class="btn" onclick="calNav(0)">Today</button>
-          <button class="btn" onclick="calNav(1)">Next</button>
-        </div>
-      </div>
-      <div class="cal-grid-wrap">
-        <div class="cal-sidebar">
-          <div class="cal-sb-h">Overlay Strategy</div>
-          <div class="cal-sb-search"><input type="text" placeholder="Search strategies..." oninput="filterSidebar(this.value)"></div>
-          <div class="cal-sb-list" id="sb-list"></div>
-          <div style="padding:12px;border-top:1px solid var(--bd);background:var(--sf);font-size:11px;font-weight:700" id="sb-active-wr"></div>
-        </div>
-        <div class="cal-main">
-          <div class="cal-days">
-            <div class="cal-day-label">Sun</div><div class="cal-day-label">Mon</div><div class="cal-day-label">Tue</div>
-            <div class="cal-day-label">Wed</div><div class="cal-day-label">Thu</div><div class="cal-day-label">Fri</div>
-            <div class="cal-day-label">Sat</div>
-          </div>
-          <div class="cal-cells" id="cal-cells"></div>
-        </div>
-      </div>
-      <div id="day-panel"></div>
-    </div>
-  </div>
-
-  <!-- WALLETS -->
   <div class="sec" id="tab-wallets">
     <div class="tb">
-      <span class="tbl">Filter:</span>
       <button class="btn" id="btn-elite" onclick="wEliteOnly=!wEliteOnly;this.classList.toggle('on');renderWallets()">Elite Retail (<$20k Portfolio)</button>
-      <span class="tbl" style="margin-left:12px">Price Range:</span>
-      <button class="btn on" onclick="wp(0,1,this)">All</button>
-      <button class="btn" onclick="wp(.5,.6,this)">50-60¢</button>
-      <button class="btn" onclick="wp(.6,.7,this)">60-70¢</button>
-      <button class="btn" onclick="wp(.7,1,this)">70¢+</button>
-      <span class="tbl" style="margin-left:12px">Min Rounds:</span>
-      <button class="btn on" onclick="wmr(3,this)">3+</button>
-      <button class="btn" onclick="wmr(5,this)">5+</button>
       <span class="tbl" style="margin-left:12px">Sort:</span>
       <button class="btn on" onclick="ws('wr',this)">Win Rate</button>
-      <button class="btn" onclick="ws('pnl',this)">PnL</button>
       <button class="btn" onclick="ws('port',this)">Portfolio Val</button>
     </div>
     <div class="table-wrap"><table>
       <thead><tr>
-        <th>#</th><th>Wallet / Name</th><th onclick="ws('wr')">Win Rate</th><th onclick="ws('port')">Portfolio</th>
-        <th onclick="ws('pnl')">Est. PnL</th><th>Rounds</th><th>Entry Timing</th>
-        <th>Late WR</th><th>Type</th>
+        <th>#</th><th>Wallet</th><th onclick="ws('wr')">Win Rate</th><th onclick="ws('port')">Portfolio</th>
+        <th>Rounds</th><th>Type</th>
       </tr></thead>
       <tbody id="wtbody"></tbody>
     </table></div>
   </div>
 
-  <!-- BUCKETS -->
   <div class="sec" id="tab-buckets">
     <div class="bg-grid" id="bucket-grid"></div>
   </div>
@@ -301,106 +171,122 @@ tr:last-child td{border-bottom:none}
 const RAILWAY_API='https://pp-pulse-api-production.up.railway.app';
 const DA='https://data-api.polymarket.com',GA='https://gamma-api.polymarket.com';
 
-let G={wallets:{},rounds:[],strats:[],calRounds:[]};
-let calY=new Date().getFullYear(),calM=new Date().getMonth();
-let selDay=null,selStratId=null;
+let G={wallets:{},rounds:[],strats:[]};
 let stratSort='wr',stratFilter=null,expId=null;
-let wPriceMin=0,wPriceMax=1,wMinR=3,wSort='wr',wEliteOnly=false;
+let wSort='wr',wEliteOnly=false;
 
-// ── 95 STRATEGIES ──────────────────────────────────────────────────────────────
+// ── 95+ STRATEGIES ─────────────────────────────────────────────────────────────
 const STRATS=[
-// VOLUME (9)
-{id:'v1',name:'Volume Dom. 80%',tags:['vol'],desc:'Side with >80% of buy volume.',why:'Overwhelming dominance = near-certain direction.',sig:r=>{const t=r.uV+r.dV;if(t<50)return null;if(r.uV/t>.80)return'UP';if(r.dV/t>.80)return'DOWN';return null}},
-{id:'v2',name:'Volume Dom. 70%',tags:['vol'],desc:'Side with >70% of buy volume.',why:'Strong momentum above noise floor.',sig:r=>{const t=r.uV+r.dV;if(t<50)return null;if(r.uV/t>.70)return'UP';if(r.dV/t>.70)return'DOWN';return null}},
-{id:'v3',name:'Volume Dom. 60%',tags:['vol'],desc:'Side with >60% of buy volume.',why:'Looser threshold — more signals.',sig:r=>{const t=r.uV+r.dV;if(t<40)return null;if(r.uV/t>.60)return'UP';if(r.dV/t>.60)return'DOWN';return null}},
-{id:'v4',name:'Late Surge 60s',tags:['vol'],desc:'>65% of final 60s buy volume on one side.',why:'Late capital is most informed.',sig:r=>{const t=r.lU+r.lD;if(t<20)return null;if(r.lU/t>.65)return'UP';if(r.lD/t>.65)return'DOWN';return null}},
-{id:'v5',name:'Late Surge 30s',tags:['vol'],desc:'>60% of final 30s volume. Highest conviction.',why:'Last 30s entrants have near-oracle timing.',sig:r=>{const t=r.vlU+r.vlD;if(t<10)return null;if(r.vlU/t>.60)return'UP';if(r.vlD/t>.60)return'DOWN';return null}},
-{id:'v6',name:'Velocity Spike 3x',tags:['vol'],desc:'Late rate 3x+ early rate = momentum.',why:'Acceleration signals new information entering.',sig:r=>{const eU=r.uV-r.lU,eD=r.dV-r.lD;if(r.lU>eU*3&&r.lU>30)return'UP';if(r.lD>eD*3&&r.lD>30)return'DOWN';return null}},
-{id:'v7',name:'Retail Fade',tags:['vol','onchain'],desc:'Fade when small trades (<$20) pile >70% one way.',why:'Retail is whale exit liquidity.',sig:r=>{const t=r.sU+r.sD;if(t<8)return null;if(r.sU/t>.70)return'DOWN';if(r.sD/t>.70)return'UP';return null}},
-{id:'v8',name:'Opening Volume',tags:['vol'],desc:'Side dominating first 45s sets the tone.',why:'Round opener reveals expected direction.',sig:r=>{const t=r.earlyU+r.earlyD;if(t<15)return null;if(r.earlyU/t>.65)return'UP';if(r.earlyD/t>.65)return'DOWN';return null}},
-{id:'v9',name:'Volume Divergence',tags:['vol','price'],desc:'High volume but price barely moved = absorption.',why:'Whales absorbing retail = reversal follows.',sig:r=>{const t=r.uV+r.dV;if(t<100||Math.abs(r.upP-.5)<.15)return null;if(r.uV/t>.65&&r.upP<.55)return'DOWN';if(r.dV/t>.65&&r.upP>.45)return'UP';return null}},
+// VOLUME (11)
+{id:'v1',name:'Volume Dom. 80%',tags:['vol'],desc:'Side with >80% of buy volume.',why:'Overwhelming dominance.',sig:r=>{const t=r.uV+r.dV;if(t<50)return null;if(r.uV/t>.80)return'UP';if(r.dV/t>.80)return'DOWN';return null}},
+{id:'v2',name:'Volume Dom. 70%',tags:['vol'],desc:'Side with >70% of buy volume.',why:'Strong momentum.',sig:r=>{const t=r.uV+r.dV;if(t<50)return null;if(r.uV/t>.70)return'UP';if(r.dV/t>.70)return'DOWN';return null}},
+{id:'v3',name:'Volume Dom. 60%',tags:['vol'],desc:'Side with >60% of buy volume.',why:'Looser threshold.',sig:r=>{const t=r.uV+r.dV;if(t<40)return null;if(r.uV/t>.60)return'UP';if(r.dV/t>.60)return'DOWN';return null}},
+{id:'v4',name:'Late Surge 60s',tags:['vol'],desc:'>65% of final 60s volume.',why:'Late capital is informed.',sig:r=>{const t=r.lU+r.lD;if(t<20)return null;if(r.lU/t>.65)return'UP';if(r.lD/t>.65)return'DOWN';return null}},
+{id:'v5',name:'Late Surge 30s',tags:['vol'],desc:'>60% of final 30s volume.',why:'Last 30s entrants.',sig:r=>{const t=r.vlU+r.vlD;if(t<10)return null;if(r.vlU/t>.60)return'UP';if(r.vlD/t>.60)return'DOWN';return null}},
+{id:'v6',name:'Velocity Spike 3x',tags:['vol'],desc:'Late rate 3x+ early rate.',why:'Acceleration.',sig:r=>{const eU=r.uV-r.lU,eD=r.dV-r.lD;if(r.lU>eU*3&&r.lU>30)return'UP';if(r.lD>eD*3&&r.lD>30)return'DOWN';return null}},
+{id:'v7',name:'Retail Fade',tags:['vol'],desc:'Fade small trades (<$20) >70% one way.',why:'Retail is exit liquidity.',sig:r=>{const t=r.sU+r.sD;if(t<8)return null;if(r.sU/t>.70)return'DOWN';if(r.sD/t>.70)return'UP';return null}},
+{id:'v8',name:'Opening Volume',tags:['vol'],desc:'Side dominating first 45s.',why:'Round opener bias.',sig:r=>{const t=r.earlyU+r.earlyD;if(t<15)return null;if(r.earlyU/t>.65)return'UP';if(r.earlyD/t>.65)return'DOWN';return null}},
+{id:'v9',name:'Volume Divergence',tags:['vol'],desc:'High volume but price barely moved.',why:'Absorption.',sig:r=>{const t=r.uV+r.dV;if(t<100||Math.abs(r.upP-.5)<.15)return null;if(r.uV/t>.65&&r.upP<.55)return'DOWN';if(r.dV/t>.65&&r.upP>.45)return'UP';return null}},
+{id:'v10',name:'Volume Mirroring',tags:['vol'],desc:'Follow previous round volume leader.',why:'Volume trends persist.',sig:(r,p,h)=>{const pr=h[h.length-1];if(!pr)return null;return pr.uV>pr.dV?'UP':'DOWN'}},
+{id:'v11',name:'Inverse Vol Climax',tags:['vol'],desc:'Fade when volume is 10x average.',why:'Exhaustion.',sig:r=>r.uV+r.dV>200?r.uV>r.dV?'DOWN':'UP':null},
 
 // MOMENTUM & REVERSAL (12)
-{id:'m1',name:'3-Up Trend Follow',tags:['momentum'],desc:'UP after 3 consecutive UP closes.',why:'Strong momentum tends to have one final push.',sig:(r,p)=>p.slice(-3).every(x=>x==='UP')?'UP':null},
-{id:'m2',name:'3-Down Trend Follow',tags:['momentum'],desc:'DOWN after 3 consecutive DOWN closes.',why:'Downward pressure cascades.',sig:(r,p)=>p.slice(-3).every(x=>x==='DOWN')?'DOWN':null},
-{id:'m3',name:'Rubber Band 4',tags:['reversal'],desc:'Fade after 4 same direction.',why:'4 is the statistical exhaustion point for 5m.',sig:(r,p)=>{const l=p.slice(-4);if(l.every(x=>x==='UP'))return'DOWN';if(l.every(x=>x==='DOWN'))return'UP';return null}},
-{id:'m4',name:'Volatility Squeeze',tags:['vol'],desc:'Bet after 3 rounds of <$10k volume.',why:'Low volume leads to explosive breakouts.',sig:(r,p)=>{const t=r.uV+r.dV;if(t>10)return null;return r.upP>.5?'UP':'DOWN'}},
-{id:'m5',name:'UP Washout Reversal',tags:['reversal'],desc:'DOWN after UP price hits 95¢ then drops to 85¢.',why:'Blow-off tops often reverse instantly.',sig:r=>r.upP>.80&&r.uV>50?'DOWN':null},
-{id:'m6',name:'DOWN Washout Reversal',tags:['reversal'],desc:'UP after UP price hits 5¢ then bounces to 15¢.',why:'Capitulation bottoms.',sig:r=>r.upP<.20&&r.dV>50?'UP':null},
-{id:'m7',name:'The Pin-Bar 5m',tags:['price'],desc:'Bet opposite of extreme early round price.',why:'Wicks on candle charts = fakeouts.',sig:r=>r.upP>.85?'DOWN':r.upP<.15?'UP':null},
-{id:'m8',name:'Volume Divergence UP',tags:['vol'],desc:'UP price falling but volume increasing.',why:'Hidden accumulation.',sig:r=>r.upP<.45&&r.uV>r.dV*2?'UP':null},
-{id:'m9',name:'Volume Divergence DOWN',tags:['vol'],desc:'UP price rising but volume increasing on DOWN side.',why:'Hidden distribution.',sig:r=>r.upP>.55&&r.dV>r.uV*2?'DOWN':null},
-{id:'m10',name:'Round Number Bias',tags:['price'],desc:'Bet against 50¢ precisely.',why:'Market makers trap retail at equilibrium.',sig:r=>r.upP===.50?Math.random()>.5?'UP':'DOWN':null},
-{id:'m11',name:'Step-Climb UP',tags:['momentum'],desc:'UP if last 2 rounds were UP and price is rising.',why:'Orderly trending market.',sig:(r,p)=>p.slice(-2).every(x=>x==='UP')&&r.upP>.60?'UP':null},
-{id:'m12',name:'Step-Climb DOWN',tags:['momentum'],desc:'DOWN if last 2 were DOWN and price is falling.',why:'Orderly downtrend.',sig:(r,p)=>p.slice(-2).every(x=>x==='DOWN')&&r.upP<.40?'DOWN':null},
+{id:'m1',name:'3-Up Trend Follow',tags:['momentum'],desc:'UP after 3 consecutive UP closes.',why:'Strong momentum push.',sig:(r,p)=>p.slice(-3).every(x=>x==='UP')?'UP':null},
+{id:'m2',name:'3-Down Trend Follow',tags:['momentum'],desc:'DOWN after 3 consecutive DOWN closes.',why:'Downward cascade.',sig:(r,p)=>p.slice(-3).every(x=>x==='DOWN')?'DOWN':null},
+{id:'m3',name:'Rubber Band 4',tags:['reversal'],desc:'Fade after 4 same direction.',why:'Statistical exhaustion.',sig:(r,p)=>{const l=p.slice(-4);if(l.every(x=>x==='UP'))return'DOWN';if(l.every(x=>x==='DOWN'))return'UP';return null}},
+{id:'m4',name:'Volatility Squeeze',tags:['vol'],desc:'Bet after 3 rounds of <$10k volume.',why:'Explosive breakouts.',sig:(r,p)=>{const t=r.uV+r.dV;if(t>10)return null;return r.upP>.5?'UP':'DOWN'}},
+{id:'m5',name:'UP Washout Reversal',tags:['reversal'],desc:'DOWN after 95¢ then drop to 85¢.',why:'Blow-off tops.',sig:r=>r.upP>.80&&r.uV>50?'DOWN':null},
+{id:'m6',name:'DOWN Washout Reversal',tags:['reversal'],desc:'UP after 5¢ then bounce to 15¢.',why:'Capitulation bottoms.',sig:r=>r.upP<.20&&r.dV>50?'UP':null},
+{id:'m7',name:'The Pin-Bar 5m',tags:['price'],desc:'Bet opposite of extreme early price.',why:'Fakeout wicks.',sig:r=>r.upP>.85?'DOWN':r.upP<.15?'UP':null},
+{id:'m8',name:'Volume Divergence UP',tags:['vol'],desc:'UP price falling but volume up.',why:'Hidden accumulation.',sig:r=>r.upP<.45&&r.uV>r.dV*2?'UP':null},
+{id:'m9',name:'Volume Divergence DOWN',tags:['vol'],desc:'UP price rising but dV up.',why:'Hidden distribution.',sig:r=>r.upP>.55&&r.dV>r.uV*2?'DOWN':null},
+{id:'m10',name:'Round Number Bias',tags:['price'],desc:'Bet against 50¢ precisely.',why:'Equilibrium trap.',sig:r=>r.upP===.50?Math.random()>.5?'UP':'DOWN':null},
+{id:'m11',name:'Step-Climb UP',tags:['momentum'],desc:'UP if 2 last UP and price rising.',why:'Orderly trend.',sig:(r,p)=>p.slice(-2).every(x=>x==='UP')&&r.upP>.60?'UP':null},
+{id:'m12',name:'Step-Climb DOWN',tags:['momentum'],desc:'DOWN if 2 last DOWN and price falling.',why:'Orderly trend.',sig:(r,p)=>p.slice(-2).every(x=>x==='DOWN')&&r.upP<.40?'DOWN':null},
 
-// PRICE (11)
-{id:'p1',name:'DOWN Value 50-60¢',tags:['price'],desc:'DOWN when UP is 50-60¢.',why:'Market bullish bias overprices even at 55¢.',sig:r=>r.upP>.50&&r.upP<=.60?'DOWN':null},
-{id:'p2',name:'DOWN Value 60-70¢',tags:['price'],desc:'DOWN when UP is 60-70¢.',why:'Retail bias pushes UP 5-10¢ above fair value.',sig:r=>r.upP>.60&&r.upP<=.70?'DOWN':null},
-{id:'p3',name:'DOWN Value 70-80¢',tags:['price'],desc:'DOWN when UP is 70-80¢.',why:'Core market inefficiency. DOWN wins >30% of these.',sig:r=>r.upP>.70&&r.upP<=.80?'DOWN':null},
-{id:'p4',name:'DOWN Deep Value 80-90¢',tags:['price'],desc:'DOWN when UP is 80-90¢. 400-900% upside.',why:'Market overestimates UP at high prices.',sig:r=>r.upP>.80&&r.upP<=.90?'DOWN':null},
-{id:'p5',name:'DOWN Extreme 90¢+',tags:['price'],desc:'DOWN when UP >90¢.',why:'Extreme overconfidence. BTC mean-reverts.',sig:r=>r.upP>.90?'DOWN':null},
-{id:'p6',name:'UP Value <30¢',tags:['price'],desc:'UP when UP is <30¢. Contrarian buy.',why:'Market oversold on UP direction.',sig:r=>r.upP<.30?'UP':null},
-{id:'p7',name:'Price Compression',tags:['price','vol'],desc:'Both near 50¢ — bet volume direction.',why:'Indecision breaks hard with volume.',sig:r=>{if(r.upP<.44||r.upP>.56)return null;const t=r.uV+r.dV;if(t<30)return null;return r.uV>r.dV?'UP':'DOWN'}},
-{id:'p8',name:'Extreme Contrarian',tags:['price'],desc:'Fade when UP>85¢ or UP<15¢.',why:'Extremes historically overcorrected.',sig:r=>{if(r.upP>.85)return'DOWN';if(r.upP<.15)return'UP';return null}},
-{id:'p9',name:'EV Calculator',tags:['price'],desc:'Positive EV based on calibrated historical WR.',why:'Pure math edge — bet when EV is positive.',sig:r=>{const p=r.upP;const uw=p<.3?.22:p<.5?.44:p<.6?.51:p<.7?.55:p<.8?.60:p<.9?.63:.66;const dw=1-uw;const ue=uw*(1/p)-1,de=dw*(1/(1-p))-1;if(ue>.12&&ue>de+.08)return'UP';if(de>.12&&de>ue+.08)return'DOWN';return null}},
-{id:'p10',name:'DOWN Value >70¢',tags:['price'],desc:'DOWN whenever UP is above 70¢.',why:'UP holders -$635K alltime; DOWN +$396K.',sig:r=>r.upP>.70?'DOWN':null},
-{id:'p11',name:'DOWN Value >75¢',tags:['price'],desc:'DOWN when UP >75¢. Most reliable zone.',why:'75¢+ is where the inefficiency peaks.',sig:r=>r.upP>.75?'DOWN':null},
+// PRICE (13)
+{id:'p1',name:'DOWN Value 50-60¢',tags:['price'],desc:'DOWN when UP is 50-60¢.',why:'Bullish bias overpricing.',sig:r=>r.upP>.50&&r.upP<=.60?'DOWN':null},
+{id:'p2',name:'DOWN Value 60-70¢',tags:['price'],desc:'DOWN when UP is 60-70¢.',why:'Retail bias push.',sig:r=>r.upP>.60&&r.upP<=.70?'DOWN':null},
+{id:'p3',name:'DOWN Value 70-80¢',tags:['price'],desc:'DOWN when UP is 70-80¢.',why:'Core inefficiency.',sig:r=>r.upP>.70&&r.upP<=.80?'DOWN':null},
+{id:'p4',name:'DOWN Deep Value 80-90¢',tags:['price'],desc:'DOWN when UP is 80-90¢.',why:'Market overestimates UP.',sig:r=>r.upP>.80&&r.upP<=.90?'DOWN':null},
+{id:'p5',name:'DOWN Extreme 90¢+',tags:['price'],desc:'DOWN when UP >90¢.',why:'Extreme overconfidence.',sig:r=>r.upP>.90?'DOWN':null},
+{id:'p6',name:'UP Value <30¢',tags:['price'],desc:'UP when UP is <30¢.',why:'Contrarian buy.',sig:r=>r.upP<.30?'UP':null},
+{id:'p7',name:'Price Compression',tags:['price'],desc:'Both near 50¢ — bet volume.',why:'Indecision break.',sig:r=>{if(r.upP<.44||r.upP>.56)return null;return r.uV>r.dV?'UP':'DOWN'}},
+{id:'p8',name:'Extreme Contrarian',tags:['price'],desc:'Fade when UP>85¢ or UP<15¢.',why:'Mean reversion.',sig:r=>r.upP>.85?'DOWN':r.upP<.15?'UP':null},
+{id:'p9',name:'EV Calculator',tags:['price'],desc:'Positive EV based on WR.',why:'Pure math edge.',sig:r=>{const p=r.upP;const uw=p<.3?.22:p<.5?.44:p<.7?.55:p<.9?.63:.66;const ue=uw*(1/p)-1,de=(1-uw)*(1/(1-p))-1;if(ue>.12)return'UP';if(de>.12)return'DOWN';return null}},
+{id:'p10',name:'DOWN Value >70¢',tags:['price'],desc:'DOWN whenever UP > 70¢.',why:'Statistical bias.',sig:r=>r.upP>.70?'DOWN':null},
+{id:'p11',name:'DOWN Value >75¢',tags:['price'],desc:'DOWN when UP >75¢.',why:'Peak inefficiency.',sig:r=>r.upP>.75?'DOWN':null},
+{id:'p12',name:'Mean Reversion 10r',tags:['price'],desc:'Fade after 20¢ dev from avg.',why:'Regression.',sig:(r,p,h)=>{if(h.length<10)return null;const avg=h.slice(-10).reduce((a,b)=>a+b.uP,0)/10;if(r.uP>avg+.20)return'DOWN';if(r.uP<avg-.20)return'UP';return null}},
+{id:'p13',name:'Volatility Squeeze Play',tags:['price'],desc:'Breakout after $2k total vol.',why:'Breakout momentum.',sig:(r,p,h)=>{const pr=h[h.length-1];if(!pr||pr.uV+pr.dV>2)return null;return r.uP>.55?'UP':r.uP<.45?'DOWN':null}},
 
-// HYBRID WALLET-PRICE (8)
-{id:'h1',name:'Whale-Price Divergence',tags:['hybrid'],desc:'Whales buying UP but price <40¢.',why:'Whales are providing liquidity for a bounce.',sig:r=>r.upP<.40&&r.wCntU>=2?'UP':null},
-{id:'h2',name:'Retail Trap Fade',tags:['hybrid'],desc:'90% retail on one side but price not moving.',why:'Retail is being absorbed by smart money.',sig:r=>{const t=r.uV+r.dV;if(t<20)return null;if(r.uV/t>.85&&r.upP<.60)return'DOWN';if(r.dV/t>.85&&r.upP>.40)return'UP';return null}},
-{id:'h3',name:'Late Whale Entry',tags:['hybrid'],desc:'Whale entry in final 30s.',why:'Informed money waits for the last second.',sig:r=>r.excU>=1&&r.upP>.70?'UP':r.excD>=1&&r.upP<.30?'DOWN':null},
-{id:'h4',name:'Winning Streak Follow',tags:['hybrid'],desc:'Follow top WR wallets only during their win streaks.',why:'Hot hands stay hot.',sig:r=>r.t10U>r.t10D&&r.upP>.55?'UP':r.t10D>r.t10U&&r.upP<.45?'DOWN':null},
-{id:'h5',name:'PnL Leader Fade',tags:['hybrid'],desc:'Fade top PnL wallet if they bet >5% of total vol.',why:'Over-leveraged leaders often get liquidated/hunted.',sig:r=>r.p10U>r.uV*.10?'DOWN':r.p10D>r.dV*.10?'UP':null},
-{id:'h6',name:'Oracle Consolidation',tags:['hybrid'],desc:'All 5 "Oracle" wallets same direction.',why:'100% agreement among best timers.',sig:r=>r.orU>=5?'UP':r.orD>=5?'DOWN':null},
-{id:'h7',name:'Timing-Volume Hybrid',tags:['hybrid'],desc:'NYSE open + Whale volume.',why:'Max volatility + Max conviction.',sig:r=>{const d=new Date(r.ts*1000);if(d.getHours()!==19)return null;return r.wCntU>=2?'UP':r.wCntD>=2?'DOWN':null}},
-{id:'h8',name:'Contrarian Price Action',tags:['hybrid'],desc:'Bet UP if price dropped 20¢ but volume is UP.',why:'Aggressive buying on dips.',sig:r=>r.upP<.35&&r.uV>r.dV*1.5?'UP':null},
+// HYBRID (10)
+{id:'h1',name:'Whale-Price Div',tags:['hybrid'],desc:'Whales buying UP but price <40¢.',why:'Absorption.',sig:r=>r.upP<.40&&r.wCntU>=2?'UP':null},
+{id:'h2',name:'Retail Trap Fade',tags:['hybrid'],desc:'90% retail but price flat.',why:'Smart absorption.',sig:r=>{const t=r.uV+r.dV;if(r.uV/t>.85&&r.upP<.60)return'DOWN';if(r.dV/t>.85&&r.upP>.40)return'UP';return null}},
+{id:'h3',name:'Late Whale Entry',tags:['hybrid'],desc:'Whale entry final 30s.',why:'Informed money.',sig:r=>r.excU>=1&&r.upP>.70?'UP':r.excD>=1&&r.upP<.30?'DOWN':null},
+{id:'h4',name:'Streak Follow',tags:['hybrid'],desc:'Follow top WR during streaks.',why:'Hot hands.',sig:r=>r.t10U>r.t10D&&r.upP>.55?'UP':r.t10D>r.t10U&&r.upP<.45?'DOWN':null},
+{id:'h5',name:'PnL Leader Fade',tags:['hybrid'],desc:'Fade leader if >10% vol.',why:'Hunted whales.',sig:r=>r.p10U>r.uV*.10?'DOWN':r.p10D>r.dV*.10?'UP':null},
+{id:'h6',name:'Oracle Consolidation',tags:['hybrid'],desc:'All 5 oracles agree.',why:'100% consensus.',sig:r=>r.orU>=5?'UP':r.orD>=5?'DOWN':null},
+{id:'h7',name:'Timing-Vol Hybrid',tags:['hybrid'],desc:'NYSE open + Whale vol.',why:'Max volatility.',sig:r=>{const d=new Date(r.ts*1000);if(d.getHours()!==19)return null;return r.wCntU>=2?'UP':null}},
+{id:'h8',name:'Contrarian Action',tags:['hybrid'],desc:'UP price drop + uV high.',why:'Buying dips.',sig:r=>r.upP<.35&&r.uV>r.dV*1.5?'UP':null},
+{id:'h9',name:'Institutional Wall',tags:['hybrid'],desc:'$1k+ trade at extremes.',why:'Level defense.',sig:r=>r.wCntU>=1&&r.upP<.20?'UP':r.wCntD>=1&&r.upP>.80?'DOWN':null},
+{id:'h10',name:'Capitulation absorption',tags:['hybrid'],desc:'Retail sellers high but flat price.',why:'Absorbing panic.',sig:r=>r.sD/r.dV>.80&&r.upP>.40?'UP':null},
 
-// WALLET (12)
-{id:'w1',name:'Top 10 WR Follow',tags:['wallet','onchain'],desc:'Follow 10 highest win-rate wallets.',why:'Elite wallets are consistently right.',sig:r=>{const t=r.t10U+r.t10D;if(t<20)return null;if(r.t10U/t>.60)return'UP';if(r.t10D/t>.60)return'DOWN';return null}},
-{id:'w2',name:'Top 20 WR Follow',tags:['wallet','onchain'],desc:'Follow 20 highest win-rate wallets.',why:'Larger sample = more stable signal.',sig:r=>{const t=r.t20U+r.t20D;if(t<30)return null;if(r.t20U/t>.60)return'UP';if(r.t20D/t>.60)return'DOWN';return null}},
-{id:'w3',name:'Top 10 PnL Follow',tags:['wallet','onchain'],desc:'Follow 10 highest PnL earners.',why:'PnL = risk-adjusted real performance.',sig:r=>{const t=r.p10U+r.p10D;if(t<20)return null;if(r.p10U/t>.60)return'UP';if(r.p10D/t>.60)return'DOWN';return null}},
-{id:'w4',name:'Top 20 PnL Follow',tags:['wallet','onchain'],desc:'Follow 20 highest PnL earners.',why:'More diversified PnL-ranked signal.',sig:r=>{const t=r.p20U+r.p20D;if(t<30)return null;if(r.p20U/t>.60)return'UP';if(r.p20D/t>.60)return'DOWN';return null}},
-{id:'w5',name:'Oracle Wallet Follow',tags:['wallet','onchain'],desc:'Follow wallets with 70%+ WR in final 60s.',why:'Late winners have oracle-level timing.',sig:r=>{const t=r.orU+r.orD;if(t<10)return null;if(r.orU/t>.60)return'UP';if(r.orD/t>.60)return'DOWN';return null}},
-{id:'w6',name:'Whale Coordination 3+',tags:['wallet','onchain'],desc:'3+ whale wallets same direction.',why:'Independent large bets agreeing = max signal.',sig:r=>{if(r.wCntU>=3)return'UP';if(r.wCntD>=3)return'DOWN';return null}},
-{id:'w7',name:'Manipulator Fade',tags:['wallet','onchain'],desc:'Fade early high-WR wallets. They pump then rotate.',why:'Early entry + high WR = pump & dump pattern.',sig:r=>{const t=r.mU+r.mD;if(t<10)return null;if(r.mU/t>.65)return'DOWN';if(r.mD/t>.65)return'UP';return null}},
-{id:'w8',name:'Mid Window 90-210s',tags:['wallet','onchain'],desc:'Follow wallets entering 1.5-3.5min into round.',why:'Mid-window = informed without being manipulators.',sig:r=>{const t=r.midU+r.midD;if(t<20)return null;if(r.midU/t>.62)return'UP';if(r.midD/t>.62)return'DOWN';return null}},
-{id:'w9',name:'Size Scaling Signal',tags:['wallet','onchain'],desc:'When top wallets bet 2x their average → conviction.',why:'Professionals size up when most confident.',sig:r=>{if(r.scalU>r.scalD&&r.scalU>0)return'UP';if(r.scalD>r.scalU&&r.scalD>0)return'DOWN';return null}},
-{id:'w10',name:'Reversal Cascade',tags:['wallet','onchain'],desc:'2+ top wallets exit same direction in 60s.',why:'Smart money selling = they expect reversal.',sig:r=>{if(r.excU>=2)return'DOWN';if(r.excD>=2)return'UP';return null}},
-{id:'w11',name:'New Wallet Fade',tags:['wallet','onchain'],desc:'Fade wallets with <3 round history.',why:'New wallets are often deployed bots.',sig:r=>{const t=r.newU+r.newD;if(t<20)return null;if(r.newU/t>.70)return'DOWN';if(r.newD/t>.70)return'UP';return null}},
-{id:'w12',name:'Unique Wallet 3x',tags:['wallet','onchain'],desc:'3x more distinct wallets on one side.',why:'Unique count = real consensus, not volume tricks.',sig:r=>{const u=r.uwU,d=r.uwD;if(u+d<8)return null;if(u>d*3)return'UP';if(d>u*3)return'DOWN';return null}},
+// WALLET (14)
+{id:'w1',name:'Top 10 WR Follow',tags:['wallet'],desc:'Follow 10 best WR.',why:'Elite wallets.',sig:r=>{const t=r.t10U+r.t10D;if(t<20)return null;return r.t10U/t>.60?'UP':r.t10D/t>.60?'DOWN':null}},
+{id:'w2',name:'Top 20 WR Follow',tags:['wallet'],desc:'Follow 20 best WR.',why:'Stable signal.',sig:r=>{const t=r.t20U+r.t20D;if(t<30)return null;return r.t20U/t>.60?'UP':r.t20D/t>.60?'DOWN':null}},
+{id:'w3',name:'Top 10 PnL Follow',tags:['wallet'],desc:'Follow 10 best PnL.',why:'Profit leaders.',sig:r=>{const t=r.p10U+r.p10D;if(t<20)return null;return r.p10U/t>.60?'UP':r.p10D/t>.60?'DOWN':null}},
+{id:'w5',name:'Oracle Wallet Follow',tags:['wallet'],desc:'Follow late-winning oracles.',why:'Near-oracle timing.',sig:r=>{const t=r.orU+r.orD;if(t<10)return null;return r.orU>r.orD?'UP':'DOWN'}},
+{id:'w6',name:'Whale Coordination 3+',tags:['wallet'],desc:'3+ whales same side.',why:'Group conviction.',sig:r=>r.wCntU>=3?'UP':r.wCntD>=3?'DOWN':null},
+{id:'w7',name:'Manipulator Fade',tags:['wallet'],desc:'Fade early high-WR.',why:'Pump & rotation.',sig:r=>{const t=r.mU+r.mD;if(t<10)return null;return r.mU>r.mD?'DOWN':'UP'}},
+{id:'w8',name:'Mid Window Push',tags:['wallet'],desc:'Follow 1.5-3.5min entries.',why:'Informed middle.',sig:r=>{const t=r.midU+r.midD;if(t<20)return null;return r.midU>r.midD?'UP':'DOWN'}},
+{id:'w9',name:'Size Scaling',tags:['wallet'],desc:'Whales betting 2x avg.',why:'Conviction sizing.',sig:r=>r.scalU>r.scalD?'UP':r.scalD>r.scalU?'DOWN':null},
+{id:'w10',name:'Reversal Cascade',tags:['wallet'],desc:'2+ top wallets exit.',why:'Smart money exit.',sig:r=>r.excU>=2?'DOWN':r.excD>=2?'UP':null},
+{id:'w11',name:'New Wallet Fade',tags:['wallet'],desc:'Fade <3 round wallets.',why:'Bot detection.',sig:r=>{const t=r.newU+r.newD;if(t<20)return null;return r.newU/t>.70?'DOWN':r.newD/t>.70?'UP':null}},
+{id:'w12',name:'Unique Wallet 3x',tags:['wallet'],desc:'3x more unique addresses.',why:'Broad consensus.',sig:r=>r.uwU>r.uwD*3?'UP':r.uwD>r.uwU*3?'DOWN':null},
+{id:'w13',name:'Win Streak Fade',tags:['wallet'],desc:'Fade wallet with 5+ wins.',why:'Gambler fallacy.',sig:r=>{if(!G.wallets)return null;const h=Object.values(G.wallets).filter(w=>w.wins>=5);return h.some(w=>w.addr===r.addr)?'DOWN':null}},
+{id:'w14',name:'Loss Streak Mirror',tags:['wallet'],desc:'Follow 5+ loss (inverse).',why:'Reversion.',sig:r=>{if(!G.wallets)return null;const h=Object.values(G.wallets).filter(w=>w.losses>=5);return h.some(w=>w.addr===r.addr)?'UP':null}},
+{id:'va11',name:'Whale Cluster 3+',tags:['wallet'],desc:'3+ whales same side 120s.',why:'High NW consensus.',sig:r=>r.wCntU>=3?'UP':r.wCntD>=3?'DOWN':null},
 
-// PRICE VOLUME ACTION (10)
-{id:'va1',name:'Vol Surge UP',tags:['vol'],desc:'UP when vol is 3x avg and price > 55¢.',why:'High conviction buying.',sig:r=>r.uV>30&&r.upP>.55?'UP':null},
-{id:'va2',name:'Vol Surge DOWN',tags:['vol'],desc:'DOWN when vol is 3x avg and price < 45¢.',why:'High conviction selling.',sig:r=>r.dV>30&&r.upP<.45?'DOWN':null},
-{id:'va3',name:'Divergent UP',tags:['vol','reversal'],desc:'UP when price < 30¢ but uV > dV.',why:'Buying the blood.',sig:r=>r.upP<.30&&r.uV>r.dV?'UP':null},
-{id:'va4',name:'Divergent DOWN',tags:['vol','reversal'],desc:'DOWN when price > 70¢ but dV > uV.',why:'Selling the top.',sig:r=>r.upP>.70&&r.dV>r.uV?'DOWN':null},
-{id:'va5',name:'Dead Calm UP',tags:['vol'],desc:'UP when total vol < $5k and price > 50¢.',why:'Low liquidity drift.',sig:r=>r.uV+r.dV<5&&r.upP>.50?'UP':null},
-{id:'va6',name:'Dead Calm DOWN',tags:['vol'],desc:'DOWN when total vol < $5k and price < 50¢.',why:'Low liquidity drift.',sig:r=>r.uV+r.dV<5&&r.upP<.50?'DOWN':null},
-{id:'va7',name:'Whale Absorption',tags:['vol','wallet'],desc:'DOWN when whale count UP >= 3 but price < 60¢.',why:'Whales are being absorbed.',sig:r=>r.wCntU>=3&&r.upP<.60?'DOWN':null},
-{id:'va8',name:'Inverse Whale',tags:['vol','wallet'],desc:'UP when whale count DOWN >= 3 but price > 40¢.',why:'Whales are being absorbed.',sig:r=>r.wCntD>=3&&r.upP>.40?'UP':null},
-{id:'va9',name:'Final Minute Flip',tags:['vol','timing'],desc:'Bet opposite of early round direction if vol spikes late.',why:'Late round reversal.',sig:r=>r.lU>r.uV*0.7?'UP':r.lD>r.dV*0.7?'DOWN':null},
-{id:'va10',name:'Volume Consistency',tags:['vol'],desc:'Follow direction if vol is steady for 3 min.',why:'Institutional accumulation.',sig:r=>r.uV>20&&r.dV<5?'UP':r.dV>20&&r.uV<5?'DOWN':null},
+// PATTERN (12)
+{id:'pr1',name:'Staircase UP',tags:['pattern'],desc:'2 rounds of rising prices.',why:'Trend cont.',sig:(r,p,h)=>h.slice(-2).every((x,i,a)=>i===0||x.upP>a[i-1].upP)?'UP':null},
+{id:'pr2',name:'Staircase DOWN',tags:['pattern'],desc:'2 rounds of falling prices.',why:'Trend cont.',sig:(r,p,h)=>h.slice(-2).every((x,i,a)=>i===0||x.upP<a[i-1].upP)?'DOWN':null},
+{id:'pr3',name:'Zig-Zag',tags:['pattern'],desc:'UP, DOWN, UP -> DOWN.',why:'Mean reversion.',sig:(r,p)=>p.slice(-3).join(',')==='UP,DOWN,UP'?'DOWN':null},
+{id:'pr4',name:'Double Bottom',tags:['pattern'],desc:'Hit <20¢ twice in 5r.',why:'Support.',sig:(r,p,h)=>h.slice(-5).filter(x=>x.upP<.20).length>=2?'UP':null},
+{id:'pr5',name:'Double Top',tags:['pattern'],desc:'Hit >80¢ twice in 5r.',why:'Resistance.',sig:(r,p,h)=>h.slice(-5).filter(x=>x.upP>.80).length>=2?'DOWN':null},
+{id:'pr6',name:'Trend Exh. UP',tags:['pattern'],desc:'5 rounds of price >60¢.',why:'Overbought.',sig:(r,p,h)=>h.slice(-5).every(x=>x.upP>.60)?'DOWN':null},
+{id:'pr7',name:'Trend Exh. DOWN',tags:['pattern'],desc:'5 rounds of price <40¢.',why:'Oversold.',sig:(r,p,h)=>h.slice(-5).every(x=>x.upP<.40)?'UP':null},
+{id:'pr8',name:'Vol Spike Rev.',tags:['pattern'],desc:'Fade after 5x avg volume.',why:'Climax volume.',sig:r=>r.uV+r.dV>100?r.uV>r.dV?'DOWN':'UP':null},
+{id:'pr9',name:'The Oscillator',tags:['pattern'],desc:'Opposite after 2 same.',why:'Mean reversion.',sig:(r,p)=>p.slice(-2).every(x=>x===p[p.length-1])?p[p.length-1]==='UP'?'DOWN':'UP':null},
+{id:'pr10',name:'The Magnet 50',tags:['pattern'],desc:'Bet towards 50¢ from 40/60.',why:'Equilibrium.',sig:r=>r.upP<.45?'UP':r.upP>.55?'DOWN':null},
+{id:'pr11',name:'The Bounce back',tags:['pattern'],desc:'UP after 15¢ drop in 2r.',why:'Oversold bounce.',sig:(r,p,h)=>{const pr=h[h.length-2];return pr&&pr.uP-r.uP>.15?'UP':null}},
+{id:'pr12',name:'The Cooling Down',tags:['pattern'],desc:'DOWN after 15¢ rise in 2r.',why:'Overbought cooling.',sig:(r,p,h)=>{const pr=h[h.length-2];return pr&&r.uP-pr.uP>.15?'DOWN':null}},
 
-// PATTERN RECOGNITION (10)
-{id:'pr1',name:'The Staircase UP',tags:['pattern'],desc:'UP after 2 rounds of rising entry prices.',why:'Trend continuation.',sig:(r,p,h)=>h.slice(-2).every((x,i,a)=>i===0||x.upP>a[i-1].upP)?'UP':null},
-{id:'pr2',name:'The Staircase DOWN',tags:['pattern'],desc:'DOWN after 2 rounds of falling entry prices.',why:'Trend continuation.',sig:(r,p,h)=>h.slice(-2).every((x,i,a)=>i===0||x.upP<a[i-1].upP)?'DOWN':null},
-{id:'pr3',name:'The Zig-Zag',tags:['pattern'],desc:'Follow the zig-zag (UP, DOWN, UP -> DOWN).',why:'Mean reversion pattern.',sig:(r,p)=>p.slice(-3).join(',')==='UP,DOWN,UP'?'DOWN':null},
-{id:'pr4',name:'Double Bottom UP',tags:['pattern'],desc:'UP if price hit < 20¢ twice in 5 rounds.',why:'Support established.',sig:(r,p,h)=>h.slice(-5).filter(x=>x.upP<.20).length>=2?'UP':null},
-{id:'pr5',name:'Double Top DOWN',tags:['pattern'],desc:'DOWN if price hit > 80¢ twice in 5 rounds.',why:'Resistance established.',sig:(r,p,h)=>h.slice(-5).filter(x=>x.upP>.80).length>=2?'DOWN':null},
-{id:'pr6',name:'Trend Exhaustion UP',tags:['pattern'],desc:'DOWN after 5 rounds of price > 60¢.',why:'Overbought.',sig:(r,p,h)=>h.slice(-5).every(x=>x.upP>.60)?'DOWN':null},
-{id:'pr7',name:'Trend Exhaustion DOWN',tags:['pattern'],desc:'UP after 5 rounds of price < 40¢.',why:'Oversold.',sig:(r,p,h)=>h.slice(-5).every(x=>x.upP<.40)?'UP':null},
-{id:'pr8',name:'Volatility Spike Reversal',tags:['pattern'],desc:'Fade after a round with 5x average volume.',why:'Climax volume.',sig:r=>r.uV+r.dV>100?r.uV>r.dV?'DOWN':'UP':null},
-{id:'pr9',name:'The Oscillator',tags:['pattern'],desc:'Bet opposite of last 2 rounds if they were the same.',why:'Short term mean reversion.',sig:(r,p)=>p.slice(-2).every(x=>x===p[p.length-1])?p[p.length-1]==='UP'?'DOWN':'UP':null},
-{id:'pr10',name:'The Magnet 50',tags:['pattern'],desc:'Bet towards 50¢ if price is 40¢ or 60¢.',why:'Equilibrium attraction.',sig:r=>r.upP<.45?'UP':r.upP>.55?'DOWN':null},
+// TIME (7)
+{id:'t1',name:'Asia Open Push',tags:['time'],desc:'Follow trend at 00:00 UTC.',why:'Asian volatility.',sig:r=>{const d=new Date(r.ts*1000);return d.getUTCHours()===0?(r.upP>.55?'UP':r.upP<.45?'DOWN':null):null}},
+{id:'t2',name:'London Open Push',tags:['time'],desc:'Follow trend at 08:00 UTC.',why:'London volatility.',sig:r=>{const d=new Date(r.ts*1000);return d.getUTCHours()===8?(r.upP>.55?'UP':r.upP<.45?'DOWN':null):null}},
+{id:'t3',name:'NYC Lunch Reversal',tags:['time'],desc:'Fade trend at 17:00 UTC.',why:'Mid-day shift.',sig:r=>{const d=new Date(r.ts*1000);return d.getUTCHours()===17?(r.upP>.60?'DOWN':r.upP<.40?'UP':null):null}},
+{id:'t4',name:'Weekend Bias',tags:['time'],desc:'Bet UP on Sat/Sun if vol low.',why:'Retail bullishness.',sig:r=>{const d=new Date(r.ts*1000);if(d.getUTCDay()!==0&&d.getUTCDay()!==6)return null;return r.uV+r.dV<10?'UP':null}},
+{id:'t5',name:'Final Sec Oracle',tags:['time'],desc:'Follow last 10s volume.',why:'Oracle windows.',sig:r=>r.vlU>r.vlD*3?'UP':r.vlD>r.vlU*3?'DOWN':null},
+{id:'t6',name:'Pre-Close Flush',tags:['time'],desc:'Fade trend in final 30s.',why:'Late round hedging.',sig:r=>r.lU>r.lD*1.5?'DOWN':r.lD>r.lU*1.5?'UP':null},
+{id:'t7',name:'NYSE Close Alpha',tags:['time'],desc:'Follow trend at 20:00 UTC.',why:'Market close momentum.',sig:r=>{const d=new Date(r.ts*1000);return d.getUTCHours()===20?r.upP>.55?'UP':'DOWN':null}},
 
-// COMPOSITE (5)
-{id:'c1',name:'Smart Composite 3+',tags:['wallet','vol','price'],desc:'3+ of: top wallets, late money, volume agree.',why:'Multi-signal consensus cuts false positives.',sig:r=>{const s=[];const t=r.t20U+r.t20D;if(t>20)s.push(r.t20U/t>.60?'UP':r.t20D/t>.60?'DOWN':null);const lt=r.lU+r.lD;if(lt>10)s.push(r.lU/lt>.65?'UP':r.lD/lt>.65?'DOWN':null);const vt=r.uV+r.dV;if(vt>50)s.push(r.uV/vt>.65?'UP':r.dV/vt>.65?'DOWN':null);const ot=r.orU+r.orD;if(ot>5)s.push(r.orU>r.orD?'UP':'DOWN');const v=s.filter(Boolean),u=v.filter(x=>x==='UP').length,d=v.filter(x=>x==='DOWN').length;if(v.length>=3&&u>=3)return'UP';if(v.length>=3&&d>=3)return'DOWN';return null}},
-{id:'c2',name:'Whale + Value Combo',tags:['wallet','price'],desc:'Top wallets AND price inefficiency agree.',why:'Both rare + both agreeing = high accuracy.',sig:r=>{const t=r.t10U+r.t10D;if(t<15)return null;if(r.t10D/t>.60&&r.upP>.70)return'DOWN';if(r.t10U/t>.60&&r.upP<.30)return'UP';return null}},
-{id:'c3',name:'Anti-Pump Composite',tags:['wallet','onchain'],desc:'Manip vs smart money disagree → trust smart.',why:'Disagreement = manipulation in progress.',sig:r=>{const mt=r.mU+r.mD,tt=r.t10U+r.t10D;if(mt<10||tt<10)return null;const mD=r.mU>r.mD?'UP':'DOWN',tD=r.t10U>r.t10D?'UP':'DOWN';if(mD!==tD)return tD;return null}},
-{id:'c4',name:'Mega Signal (4+ agree)',tags:['wallet','vol','price'],desc:'All 4 signal sources agree. Fires rarely.',why:'Maximum confidence when everything aligns.',sig:r=>{const s=[];const t=r.t20U+r.t20D;if(t>20)s.push(r.t20U/t>.60?'UP':r.t20D/t>.60?'DOWN':null);const lt=r.lU+r.lD;if(lt>10)s.push(r.lU/lt>.65?'UP':r.lD/lt>.65?'DOWN':null);const vt=r.uV+r.dV;if(vt>50)s.push(r.uV/vt>.65?'UP':r.dV/vt>.65?'DOWN':null);if(r.upP>.75)s.push('DOWN');else if(r.upP<.30)s.push('UP');const v=s.filter(Boolean),u=v.filter(x=>x==='UP').length,d=v.filter(x=>x==='DOWN').length;if(s.length>=4&&u===s.length)return'UP';if(s.length>=4&&d===s.length)return'DOWN';return null}},
-{id:'c5',name:'Conservative Safe Bet',tags:['vol','price'],desc:'Volume >80% AND price supports value bet.',why:'Most selective — highest confidence only.',sig:r=>{const t=r.uV+r.dV;if(t<50)return null;if(r.dV/t>.80&&r.upP>.60)return'DOWN';if(r.uV/t>.80&&r.upP<.40)return'UP';return null}},
+// COMPOSITE (16)
+{id:'c1',name:'Smart Composite 3+',tags:['composite'],desc:'3+ signals agree.',why:'Consensus alpha.',sig:r=>{const s=[];if(r.uV>r.dV*2)s.push('UP');if(r.dV>r.uV*2)s.push('DOWN');if(r.upP<.3)s.push('UP');if(r.upP>.7)s.push('DOWN');if(r.lU>r.lD*1.5)s.push('UP');if(r.lD>r.lU*1.5)s.push('DOWN');const u=s.filter(x=>x==='UP').length,d=s.filter(x=>x==='DOWN').length;return u>=3?'UP':d>=3?'DOWN':null}},
+{id:'c2',name:'Whale + Value',tags:['composite'],desc:'Whale AND price inefficiency.',why:'Double conviction.',sig:r=>r.wCntU>=1&&r.upP<.30?'UP':r.wCntD>=1&&r.upP>.70?'DOWN':null},
+{id:'c3',name:'Anti-Pump Comp',tags:['composite'],desc:'Manip vs smart money.',why:'Conflict resolution.',sig:r=>{const mD=r.mU>r.mD?'UP':'DOWN',tD=r.t10U>r.t10D?'UP':'DOWN';return mD!==tD?tD:null}},
+{id:'c4',name:'Mega Signal (4+)',tags:['composite'],desc:'4+ signals agree.',why:'Max confidence.',sig:r=>{const s=[];if(r.uV>r.dV*1.5)s.push('UP');if(r.dV>r.uV*1.5)s.push('DOWN');if(r.upP<.3)s.push('UP');if(r.upP>.7)s.push('DOWN');if(r.lU>r.lD)s.push('UP');if(r.lD>r.lU)s.push('DOWN');if(r.orU>r.orD)s.push('UP');if(r.orD>r.orU)s.push('DOWN');const u=s.filter(x=>x==='UP').length,d=s.filter(x=>x==='DOWN').length;return u>=4?'UP':d>=4?'DOWN':null}},
+{id:'c5',name:'Safe Bet',tags:['composite'],desc:'Vol >80% + Price.',why:'Most selective.',sig:r=>{const t=r.uV+r.dV;return (r.dV/t>.80&&r.upP>.60)?'DOWN':(r.uV/t>.80&&r.upP<.40)?'UP':null}},
+{id:'c6',name:'Ultimate Alpha',tags:['composite'],desc:'Whales + Timing + Price.',why:'Triple confirmation.',sig:r=>r.wCntU>=1&&r.vlU>r.vlD&&r.upP<.45?'UP':r.wCntD>=1&&r.vlD>r.vlU&&r.upP>.55?'DOWN':null},
+{id:'c7',name:'Retail Trap Plus',tags:['composite'],desc:'Retail Fade + Whale Entry.',why:'Pro trap.',sig:r=>r.sU/r.uV>.80&&r.wCntD>=1?'DOWN':r.sD/r.dV>.80&&r.wCntU>=1?'UP':null},
+{id:'c8',name:'Momentum Stack',tags:['composite'],desc:'3-Up + Vol Surge.',why:'Trend explosion.',sig:(r,p,h)=>p.slice(-3).every(x=>x==='UP')&&r.uV>30?'UP':null},
+{id:'c9',name:'Reversal Stack',tags:['composite'],desc:'Double Top + Whale Exit.',why:'Ceiling crash.',sig:(r,p,h)=>{const dt=h.slice(-5).filter(x=>x.upP>.80).length>=2;return dt&&r.excU>=2?'DOWN':null}},
+{id:'c10',name:'Liquidity Hunt',tags:['composite'],desc:'Pin Bar + Vol Surge.',why:'Hunt then run.',sig:r=>(r.upP>.85||r.upP<.15)&&(r.uV+r.dV>50)?(r.upP>.85?'DOWN':'UP'):null},
+{id:'c11',name:'Whale Cluster Play',tags:['composite'],desc:'Whale Cluster + Late Surge.',why:'Whale follow.',sig:r=>r.wCntU>=3&&r.lU>r.lD?'UP':r.wCntD>=3&&r.lD>r.lU?'DOWN':null},
+{id:'c12',name:'Shark Accum + EV',tags:['composite'],desc:'Shark Accum + Positive EV.',why:'Smart math.',sig:r=>{const p=r.upP,uw=p<.5?.44:.55;return r.uV/r.dV>1.5&&uw*(1/p)-1>.10?'UP':null}},
+{id:'c13',name:'Oracle Consensus',tags:['composite'],desc:'5 Oracles + Late Surge.',why:'Elite follow.',sig:r=>r.orU>=5&&r.vlU>r.vlD?'UP':null},
+{id:'c14',name:'Washout Follow',tags:['composite'],desc:'Washout Rev + Vol Consistency.',why:'Clean bottom.',sig:r=>r.upP<.20&&r.uV>20&&r.dV<5?'UP':null},
+{id:'c15',name:'Squeeze Alpha',tags:['composite'],desc:'Squeeze + Timing Spike.',why:'Compression break.',sig:(r,p,h)=>{const pr=h[h.length-1];return pr&&(pr.uV+pr.dV<5)&&r.lU>r.lD*3?'UP':null}},
+{id:'c16',name:'Macro Convergence',tags:['composite'],desc:'Asia/London Open trend stack.',why:'Session alpha.',sig:r=>{const d=new Date(r.ts*1000);const hr=d.getUTCHours();return (hr===0||hr===8)&&r.uV>r.dV*2?'UP':null}},
 ];
 
 // ── ENGINE ─────────────────────────────────────────────────────────────────────
@@ -408,316 +294,135 @@ async function buildWallets(evs){
   const W={};let done=0;
   await Promise.all(evs.map(async ev=>{
     try{
-      let oc=null;const a=JSON.parse(ev.markets?.[0]?.outcomePrices||'[]');
-      if(parseFloat(a[0])>.9)oc='UP';else if(parseFloat(a[1])>.9)oc='DOWN';
+      const m=ev.markets?.[0];if(!m)return;
+      const prices=JSON.parse(m.outcomePrices||'[]');
+      let oc=prices[0]>.9?'UP':prices[1]>.9?'DOWN':null;
       if(!oc)return;
-      const uP=parseFloat(a[0])||.5,slug=ev.slug,rTs=parseInt(slug.split('-').pop())||0,t60=(rTs+300)-60;
+      const slug=ev.slug,rTs=parseInt(slug.split('-').pop())||0;
       const trades=await fetch(`${DA}/trades?market=${slug}&limit=400&_=${Date.now()}`).then(r=>r.json()).catch(()=>[]);
       if(!Array.isArray(trades))return;
-      trades.filter(t=>{const o=(t.outcome||'').toLowerCase();return o==='up'||o==='down';}).filter(t=>t.side==='BUY').forEach(t=>{
+      trades.filter(t=>t.side==='BUY').forEach(t=>{
         const addr=t.proxyWallet||'';if(!addr)return;
-        if(!W[addr])W[addr]={addr,name:t.name||t.pseudonym||'',wins:0,losses:0,rounds:0,vol:0,maxSize:0,pnl:0,timings:[],lateVol:0,lateWins:0,lateR:0,sizes:[],byPrice:{}};
-        const w=W[addr],vol=t.size||0,isUp=(t.outcome||'').toLowerCase()==='up',won=(isUp?'UP':'DOWN')===oc,ts=t.timestamp||0;
-        w.rounds++;w.vol+=vol;w.maxSize=Math.max(w.maxSize,vol);w.sizes.push(vol);
-        if(won){w.wins++;w.pnl+=vol*(1/(t.price||.5)-1);}else{w.losses++;w.pnl-=vol;}
-        w.timings.push(ts-rTs);
-        if(ts>=t60){w.lateVol+=vol;w.lateR++;if(won)w.lateWins+=vol;}
-        const bk=uP<.5?'<50':uP<.6?'50-60':uP<.7?'60-70':uP<.8?'70-80':uP<.9?'80-90':'90+';
-        if(!w.byPrice[bk])w.byPrice[bk]={wins:0,losses:0};
-        if(won)w.byPrice[bk].wins++;else w.byPrice[bk].losses++;
+        if(!W[addr])W[addr]={addr,wins:0,losses:0,rounds:0,vol:0,pnl:0,timings:[],lateVol:0,lateWins:0,lateR:0,byPrice:{},wr:0};
+        const w=W[addr],vol=t.size||0,won=(t.outcome.toLowerCase()==='up'?'UP':'DOWN')===oc;
+        w.rounds++;w.vol+=vol;if(won){w.wins++;w.pnl+=vol*(1/t.price-1);}else{w.losses++;w.pnl-=vol;}
+        w.timings.push(t.timestamp-rTs);
+        if(t.timestamp>=(rTs+240)){w.lateVol+=vol;w.lateR++;if(won)w.lateWins+=vol;}
       });
     }catch{}
     done++;setP(done/evs.length*40);
   }));
-  Object.values(W).forEach(w=>{
-    const tot=w.wins+w.losses;
-    w.wr=tot>0?Math.round(w.wins/tot*100):0;
-    w.avgSize=w.rounds>0?w.vol/w.rounds:0;
-    w.avgTiming=w.timings.length?Math.round(w.timings.reduce((a,b)=>a+b,0)/w.timings.length):0;
-    w.lateWr=w.lateR>0?Math.round(w.lateWins/w.lateVol*100||0):0;
-  });
+  Object.values(W).forEach(w=>{const tot=w.wins+w.losses;w.wr=tot>0?Math.round(w.wins/tot*100):0;w.avgTiming=w.timings.length?Math.round(w.timings.reduce((a,b)=>a+b,0)/w.timings.length):0;w.lateWr=w.lateR>0?Math.round(w.lateWins/w.lateVol*100):0;w.avgSize=w.vol/w.rounds;});
   return W;
 }
 
-async function fetchRound(ev,W,rk){
+async function fetchRound(ev,W){
   try{
-    let oc=null;const a=JSON.parse(ev.markets?.[0]?.outcomePrices||'[]');
-    if(parseFloat(a[0])>.9)oc='UP';else if(parseFloat(a[1])>.9)oc='DOWN';
-    if(!oc)return null;
-    const uP=parseFloat(a[0])||.5,slug=ev.slug,rTs=parseInt(slug.split('-').pop())||0,rEnd=rTs+300;
+    const m=ev.markets?.[0];if(!m)return null;
+    const condId=m.conditionId; if(!condId) return null;
+    const prices=JSON.parse(m.outcomePrices||'[]');
+    let oc=prices[0]>.9?'UP':prices[1]>.9?'DOWN':null;if(!oc)return null;
+    const uP=parseFloat(prices[0])||.5,slug=ev.slug,rTs=parseInt(slug.split('-').pop())||0,rEnd=rTs+300;
     const t60=rEnd-60,t30=rEnd-30,t45=rTs+45,t90=rTs+90,t210=rTs+210;
-    const trades=await fetch(`${DA}/trades?market=${slug}&limit=400&_=${Date.now()}`).then(r=>r.json()).catch(()=>[]);
+    const trades=await fetch(`${DA}/trades?market=${condId}&limit=400&takerOnly=true&_=${Date.now()}`).then(r=>r.json()).catch(()=>[]);
     if(!Array.isArray(trades))return null;
-    const valid=trades.filter(t=>{const o=(t.outcome||'').toLowerCase();return o==='up'||o==='down';});
-    
-    // Aggregates
-    let uV=0,dV=0,lU=0,lD=0,vlU=0,vlD=0,sU=0,sD=0,earlyU=0,earlyD=0;
-    let t10U=0,t10D=0,t20U=0,t20D=0,p10U=0,p10D=0,p20U=0,p20D=0;
-    let orU=0,orD=0,wCntU=0,wCntD=0,mU=0,mD=0,midU=0,midD=0,scalU=0,scalD=0,excU=0,excD=0,newU=0,newD=0;
+    let uV=0,dV=0,lU=0,lD=0,vlU=0,vlD=0,sU=0,sD=0,earlyU=0,earlyD=0,t10U=0,t10D=0,orU=0,orD=0,wCntU=0,wCntD=0,mU=0,mD=0,midU=0,midD=0,scalU=0,scalD=0,excU=0,excD=0,newU=0,newD=0;
     const uwsU=new Set(),uwsD=new Set();
-
-    const top10WR=Object.values(W).sort((a,b)=>b.wr-a.wr).slice(0,10).map(x=>x.addr);
-    const top20WR=Object.values(W).sort((a,b)=>b.wr-a.wr).slice(0,20).map(x=>x.addr);
-    const top10PnL=Object.values(W).sort((a,b)=>b.pnl-a.pnl).slice(0,10).map(x=>x.addr);
-    const top20PnL=Object.values(W).sort((a,b)=>b.pnl-a.pnl).slice(0,20).map(x=>x.addr);
+    const t10=Object.values(W).sort((a,b)=>b.wr-a.wr).slice(0,10).map(x=>x.addr);
     const oracles=Object.values(W).filter(w=>w.lateWr>=70&&w.lateR>=3).map(x=>x.addr);
-    const manip=Object.values(W).filter(w=>w.avgTiming<60&&w.wr>=55).map(x=>x.addr);
-
+    let valid=trades.filter(t=>t.side==='BUY');
     valid.forEach(t=>{
-      const vol=t.size||0,isU=(t.outcome||'').toLowerCase()==='up',ts=t.timestamp||0,addr=t.proxyWallet||'';
+      const vol=t.size||0,isU=t.outcome.toLowerCase()==='up',ts=t.timestamp||0,addr=t.proxyWallet||'';
       if(isU){uV+=vol;uwsU.add(addr);if(ts>=t60)lU+=vol;if(ts>=t30)vlU+=vol;if(vol<20)sU+=vol;if(ts<=t45)earlyU+=vol;}
       else{dV+=vol;uwsD.add(addr);if(ts>=t60)lD+=vol;if(ts>=t30)vlD+=vol;if(vol<20)sD+=vol;if(ts<=t45)earlyD+=vol;}
-      
-      if(top10WR.includes(addr)){if(isU)t10U+=vol;else t10D+=vol;}
-      if(top20WR.includes(addr)){if(isU)t20U+=vol;else t20D+=vol;}
-      if(top10PnL.includes(addr)){if(isU)p10U+=vol;else p10D+=vol;}
-      if(top20PnL.includes(addr)){if(isU)p20U+=vol;else p20D+=vol;}
+      if(t10.includes(addr)){if(isU)t10U+=vol;else t10D+=vol;}
       if(oracles.includes(addr)){if(isU)orU++;else orD++;}
       if(vol>=500){if(isU)wCntU++;else wCntD++;}
-      if(manip.includes(addr)){if(isU)mU+=vol;else mD+=vol;}
       if(ts>=t90&&ts<=t210){if(isU)midU+=vol;else midD+=vol;}
-      const w=W[addr];if(w&&vol>w.avgSize*2){if(isU)scalU++;else scalD++;}
-      if(ts>=t60&&w&&w.wr>=60){if(isU)excU++;else excD++;}
-      if(w&&w.rounds<3){if(isU)newU+=vol;else newD+=vol;}
     });
-
-    return {slug,oc,uP,ts:rTs,date:new Date(rTs*1000),uV,dV,lU,lD,vlU,vlD,sU,sD,earlyU,earlyD,t10U,t10D,t20U,t20D,p10U,p10D,p20U,p20D,orU,orD,wCntU,wCntD,mU,mD,midU,midD,scalU,scalD,excU,excD,newU,newD,uwU:uwsU.size,uwD:uwsD.size};
-  }catch{return null;}
+    return {slug,oc,upP:uP,ts:rTs,date:new Date(rTs*1000),uV,dV,lU,lD,vlU,vlD,sU,sD,earlyU,earlyD,t10U,t10D,orU,orD,wCntU,wCntD,midU,midD,uwU:uwsU.size,uwD:uwsD.size};
+  }catch(e){console.error('fetchRound err:',e);return null;}
 }
 
-// ── PORTFOLIO TRACKER ────────────────────────────────────────────────────────
 async function fetchPortfolios(wallets) {
-  const candidates = Object.values(wallets)
-    .filter(w => w.rounds >= 3 && w.wr >= 55)
-    .sort((a, b) => b.wr - a.wr)
-    .slice(0, 80);
-  
+  const top = Object.values(wallets).filter(w => w.rounds >= 3 && w.wr >= 60).sort((a, b) => b.wr - a.wr).slice(0, 100);
   let done = 0;
-  await Promise.all(candidates.map(async w => {
+  await Promise.all(top.map(async w => {
     try {
       const resp = await fetch(`${DA}/value?user=${w.addr}`);
-      if (resp.ok) {
-        const data = await resp.json();
-        w.portfolio = data.value || 0;
-      }
+      if (resp.ok) { const data = await resp.json(); w.portfolio = data.value || 0; }
     } catch(e) {}
-    done++;
-    setStatus(`Elite retail sync: ${Math.round(done/candidates.length*100)}%`);
+    done++; setStatus(`Syncing portfolios: ${Math.round(done/top.length*100)}%`);
   }));
 }
 
-// ── INITIALIZATION ────────────────────────────────────────────────────────────
 async function init(){
-  setStatus('Loading intelligence engine...');setP(0);
-
-  // 1. Historical rounds from DB
-  setStatus('Syncing history from Railway...');setP(5);
-  const dbRows=await fetch(`${RAILWAY_API}/rounds`).then(r=>r.ok?r.json():[]).catch(()=>[]);
-  G.calRounds=dbRows.map(r=>({slug:r.slug,oc:r.outcome,uP:parseFloat(r.upP)||.5,ts:parseInt(r.ts)||0,date:new Date(r.date)})).filter(r=>r.oc==='UP'||r.oc==='DOWN');
-
-  // 2. Live rounds from Polymarket
-  setStatus('Fetching live rounds...');setP(10);
-  const liveEvs=await fetch(`${GA}/events?series_slug=btc-up-or-down-5m&limit=500&order=endDate&ascending=false`).then(r=>r.json()).catch(()=>[]);
-  const liveRes=(Array.isArray(liveEvs)?liveEvs:[]).filter(ev=>{try{const m=ev.markets?.[0];if(!m||!m.closed)return false;const a=JSON.parse(m.outcomePrices||'[]');return parseFloat(a[0])>.9||parseFloat(a[1])>.9;}catch{return false;}}).slice(0,100);
-
-  // 3. Build wallets & live round metrics
-  setStatus('Analyzing whale wallets & patterns...');
-  const wc=await buildWallets(liveRes);
-  G.wallets=wc;
-
-  const rounds=[];
-  for(let i=0;i<liveRes.length;i++){
-    const r=await fetchRound(liveRes[i],wc,i);
-    if(r)rounds.push(r);
-    setP(40 + (i/liveRes.length*40));
+  setStatus('Loading...');setP(0);
+  let db=[];
+  try {
+    db=await fetch(`${RAILWAY_API}/rounds`).then(r=>r.json()).catch(()=>[]);
+  } catch(e) {
+    console.error('Railway fetch failed:', e);
+    setStatus('⚠️ Railway API Offline (CORS or Down)');
   }
-  G.rounds=rounds.sort((a,b)=>a.ts-b.ts);
-
-  // 4. Elite Retail sync
-  setStatus('Filtering elite retail holders (<$20k)...');
+  const liveEvs=await fetch(`${GA}/events?series_slug=btc-updown-5m&closed=true&limit=100&order=endDate&ascending=false`).then(r=>r.json()).catch(()=>[]);
+  if(!liveEvs.length) { setStatus('❌ No rounds found on Polymarket API'); return; }
+  const liveRes=liveEvs.filter(ev=>{const m=ev.markets?.[0];if(!m)return false;const p=JSON.parse(m.outcomePrices||'[]');return p[0]>.9||p[1]>.9;}).slice(0,80);
+  const wc=await buildWallets(liveRes); G.wallets=wc;
+  const rs=[]; for(let i=0;i<liveRes.length;i++){const r=await fetchRound(liveRes[i],wc);if(r)rs.push(r);setP(40+(i/liveRes.length*40));}
+  G.rounds=rs.sort((a,b)=>a.ts-b.ts);
   await fetchPortfolios(wc);
-
-  // 5. Run strategies
-  setStatus('Running 95 predictive signals...');setP(82);
-  const fullH=G.calRounds,liveH=G.rounds,liveOuts=liveH.map(x=>x.oc);
-  
   G.strats=STRATS.map(st=>{
-    const hT=[];
-    fullH.forEach((r,i)=>{
-      const prev=fullH.slice(0,i).map(x=>x.oc),prevR=fullH.slice(0,i);
-      const sig=st.sig(r,prev,prevR);
-      if(sig)hT.push({oc:r.oc,sig,res:sig===r.oc?'win':'loss'});
-    });
-    const hW=hT.filter(t=>t.res==='win').length,hWR=hT.length?Math.round(hW/hT.length*100):0;
-
-    const liveT=[];
-    liveH.forEach((r,i)=>{
-      const prev=liveOuts.slice(0,i),prevR=liveH.slice(0,i);
-      const sig=st.sig(r,prev,prevR);
-      const result=sig===null?'skip':sig===r.oc?'win':'loss';
-      liveT.push({time:r.date.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),date:r.date,sig,oc:r.oc,result,uP:r.uP});
-    });
-    const lS=liveT.filter(t=>t.result!=='skip'),lW=lS.filter(t=>t.result==='win').length,lWR=lS.length?Math.round(lW/lS.length*100):0;
-    return{...st,trades:liveT,wins:lW,losses:lS.length-lW,signals:lS.length,wr:lWR,hWR,hC:hT.length,tier:lWR>=75?'S':lWR>=62?'A':lWR>=50?'B':'C'};
+    const ts=[]; G.rounds.forEach((r,i)=>{const sig=st.sig(r,G.rounds.slice(0,i).map(x=>x.oc),G.rounds.slice(0,i));const result=sig===null?'skip':sig===r.oc?'win':'loss';ts.push({time:r.date.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}),sig,oc:r.oc,result,uP:r.upP});});
+    const s=ts.filter(x=>x.result!=='skip'),w=s.filter(x=>x.result==='win').length,wr=s.length?Math.round(w/s.length*100):0;
+    return{...st,trades:ts,wins:w,losses:s.length-w,signals:s.length,wr,tier:wr>=75?'S':wr>=62?'A':wr>=50?'B':'C'};
   });
-
-  const best=Math.max(...G.strats.map(s=>s.wr));
-  document.getElementById('k-b').textContent=best+'%';
+  document.getElementById('k-r').textContent=db.length||rs.length;
   document.getElementById('k-s').textContent=G.strats.length;
-  document.getElementById('k-r').textContent=G.calRounds.length||liveRes.length;
-  setP(100);
-  setStatus(`✅ ${fullH.length} history · ${liveRes.length} live · ${Object.keys(wc).length} wallets · ${G.strats.length} strats`);
-  renderStrategies();renderWallets();renderCalendar();buildCalSidebar();renderBuckets();
+  document.getElementById('k-b').textContent=Math.max(...G.strats.map(s=>s.wr))+'%';
+  setP(100); setStatus('✅ Intelligence ready');
+  renderStrategies();renderWallets();renderBuckets();
 }
 
-// ── WALLETS ───────────────────────────────────────────────────────────────────
-function wp(min,max,b){wPriceMin=min;wPriceMax=max;if(b){document.querySelectorAll('#tab-wallets .btn').forEach(x=>x.classList.remove('on'));b.classList.add('on');}renderWallets();}
-function wmr(n,b){wMinR=n;if(b){document.querySelectorAll('#tab-wallets .btn').forEach(x=>{if(x.textContent.includes('+'))x.classList.remove('on');});b.classList.add('on');}renderWallets();}
-function ws(k,b){wSort=k;if(b){document.querySelectorAll('#tab-wallets .btn').forEach(x=>{if(['Win Rate','PnL','Portfolio Val'].includes(x.textContent))x.classList.remove('on');});b.classList.add('on');}renderWallets();}
-
-function renderWallets(){
-  let data=Object.values(G.wallets).filter(w=>w.rounds>=wMinR);
-  
-  if(wEliteOnly){
-    data=data.filter(w=>w.portfolio!==undefined && w.portfolio>0 && w.portfolio<20000 && w.wr>=60);
-  }
-
-  if(wPriceMin>0||wPriceMax<1){
-    const bk=wPriceMax<=.5?'<50':wPriceMax<=.6?'50-60':wPriceMax<=.7?'60-70':wPriceMax<=.8?'70-80':wPriceMax<=.9?'80-90':'90+';
-    data=data.filter(w=>{const b=w.byPrice[bk];return b&&(b.wins+b.losses)>=2;});
-  }
-
-  if(wSort==='wr')data.sort((a,b)=>b.wr-a.wr);
-  else if(wSort==='pnl')data.sort((a,b)=>b.pnl-a.pnl);
-  else if(wSort==='port')data.sort((a,b)=>(b.portfolio||0)-(a.portfolio||0));
-  
-  data=data.slice(0,100);
-  const tb=document.getElementById('wtbody');tb.innerHTML='';
-  data.forEach((w,i)=>{
-    const dWR=w.wr,pCol=w.pnl>0?'var(--up)':'var(--dn)';
-    const tLbl=w.avgTiming<60?'⚡ Early':w.avgTiming<180?'— Mid':'🎯 Late';
-    const tCol=w.avgTiming>180?'var(--up)':w.avgTiming<60?'var(--dn)':'var(--tx2)';
-    const name=w.name||w.addr.slice(0,6)+'…'+w.addr.slice(-4);
-    const isElite=w.portfolio!==undefined && w.portfolio<20000 && w.wr>=60;
-    const typeLbl=isElite?`<span class="tag-elite">ELITE RETAIL</span>`:w.lateWr>=70?'🔮 Oracle':w.avgTiming<60?'⚠️ Manip':'👤';
-    
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td class="mono" style="color:var(--tx3)">${i+1}</td>
-      <td><span class="waddr" onclick="window.open('https://polymarket.com/profile/${w.addr}','_blank')">${name}</span></td>
-      <td class="mono" style="color:${dWR>=60?'var(--up)':'var(--tx2)'};font-weight:700">${dWR}%</td>
-      <td class="mono">$${w.portfolio!==undefined?Math.round(w.portfolio).toLocaleString():'—'}</td>
-      <td class="mono" style="color:${pCol};font-weight:600">${w.pnl>0?'+':''}$${Math.round(w.pnl).toLocaleString()}</td>
-      <td class="mono">${w.rounds}</td>
-      <td style="color:${tCol}">${tLbl} <span style="font-family:var(--mono);font-size:9px;color:var(--tx3)">${w.avgTiming}s</span></td>
-      <td class="mono" style="color:${w.lateWr>=65?'var(--up)':'var(--tx3)'}">${w.lateR>0?w.lateWr+'%':'—'}</td>
-      <td>${typeLbl}</td>`;
-    tb.appendChild(tr);
-  });
-}
-
-// ── OTHER UI FUNCTIONS ────────────────────────────────────────────────────────
-function sf(f,b){stratFilter=f;if(b){document.querySelectorAll('#tab-strategies .btn').forEach(x=>{if(!x.textContent.includes('Rate')&&!x.textContent.includes('Signals')&&!x.textContent.includes('Name'))x.classList.remove('on');});b.classList.add('on');}renderStrategies();}
-function ss(k,b){stratSort=k;if(b){document.querySelectorAll('#tab-strategies .btn').forEach(x=>{if(x.textContent.includes('Rate')||x.textContent.includes('Signals')||x.textContent.includes('Name'))x.classList.remove('on');});b.classList.add('on');}renderStrategies();}
-
+// ── UI ────────────────────────────────────────────────────────────────────────
 function renderStrategies(){
-  let data=[...G.strats];
-  if(stratFilter)data=data.filter(s=>s.tags.includes(stratFilter));
-  if(stratSort==='wr')data.sort((a,b)=>b.wr-a.wr||b.signals-a.signals);
-  else if(stratSort==='sig')data.sort((a,b)=>b.signals-a.signals);
-  else data.sort((a,b)=>a.name.localeCompare(b.name));
+  let d=[...G.strats];if(stratFilter)d=d.filter(s=>s.tags.includes(stratFilter));
+  if(stratSort==='wr')d.sort((a,b)=>b.wr-a.wr);else d.sort((a,b)=>b.signals-a.signals);
   const g=document.getElementById('strat-grid');g.innerHTML='';
-  data.forEach(s=>{
+  d.forEach(s=>{
     const col=s.wr>=75?'var(--go)':s.wr>=62?'var(--up)':s.wr>=50?'var(--bl)':'var(--tx3)';
     const c=document.createElement('div');c.className='sc'+(expId===s.id?' open':'');c.dataset.id=s.id;
-    c.innerHTML=`<div class="sch"><span class="sc-tier t${s.tier}">${s.tier}</span><div class="sc-m"><div class="sc-n">${s.name}</div><div class="sc-tags">${s.tags.map(t=>`<span class="tag tv">${t}</span>`).join('')}</div></div><div class="sc-r"><div class="sc-wr" style="color:${col}">${s.signals?s.wr+'%':''} <small style="font-size:9px;opacity:0.6;display:block">Hist: ${s.hWR}%</small></div><div class="sc-wl">${s.wins}W·${s.losses}L·${s.signals}</div></div></div><div class="sc-bar"><div class="sc-fill" style="width:${s.wr}%;background:${col}"></div></div><div class="sc-desc">${s.desc}</div><div class="sc-why">${s.why}</div>`;
-    c.addEventListener('click',()=>{expId=expId===s.id?null:s.id;renderStrategies();});
-    g.appendChild(c);
+    c.innerHTML=`<div class="sch"><span class="sc-tier t${s.tier}">${s.tier}</span><div class="sc-m"><div class="sc-n">${s.name}</div><div class="sc-tags">${s.tags.map(t=>`<span class="tag tv">${t}</span>`).join('')}</div></div><div class="sc-r"><div class="sc-wr" style="color:${col}">${s.signals?s.wr+'%':''}</div><div class="sc-wl">${s.wins}W·${s.losses}L</div></div></div><div class="sc-bar"><div class="sc-fill" style="width:${s.wr}%;background:${col}"></div></div><div class="sc-desc">${s.desc}</div>`;
+    c.onclick=()=>{expId=expId===s.id?null:s.id;renderStrategies();};g.appendChild(c);
   });
 }
 
-function buildCalSidebar(){
-  const list=document.getElementById('sb-list');list.innerHTML='';
-  const none=document.createElement('div');none.className='cal-sb-item on';none.dataset.id='none';none.innerHTML=`<div class="cal-sb-dot" style="background:var(--bd2)"></div><span>Show All Outcomes</span>`;
-  none.addEventListener('click',()=>selectCalStrat(null));list.appendChild(none);
-  const order=['vol','price','wallet','onchain','streak','time'];
-  order.forEach(tag=>{
-    const items=G.strats.filter(s=>s.tags.includes(tag));if(!items.length)return;
-    const grp=document.createElement('div');grp.className='cal-sb-group';grp.textContent=tag.toUpperCase();list.appendChild(grp);
-    items.forEach(s=>{
-      const col=s.wr>=75?'var(--go)':s.wr>=62?'var(--up)':s.wr>=50?'var(--bl)':'var(--tx3)';
-      const el=document.createElement('div');el.className='cal-sb-item';el.dataset.id=s.id;
-      el.innerHTML=`<div class="cal-sb-dot" style="background:${col}"></div><span>${s.name}</span><span class="cal-sb-wr" style="color:${col}">${s.wr}%</span>`;
-      el.addEventListener('click',()=>selectCalStrat(s.id));list.appendChild(el);
-    });
+function renderWallets(){
+  let d=Object.values(G.wallets).filter(w=>w.rounds>=3);
+  if(wEliteOnly)d=d.filter(w=>w.portfolio!==undefined&&w.portfolio<20000&&w.wr>=60);
+  if(wSort==='wr')d.sort((a,b)=>b.wr-a.wr);else d.sort((a,b)=>(b.portfolio||0)-(a.portfolio||0));
+  const tb=document.getElementById('wtbody');tb.innerHTML='';
+  d.slice(0,100).forEach((w,i)=>{
+    const name=w.addr.slice(0,6)+'…'+w.addr.slice(-4);
+    const isElite=w.portfolio!==undefined&&w.portfolio<20000&&w.wr>=60;
+    tb.innerHTML+=`<tr><td class="mono">${i+1}</td><td class="waddr" onclick="window.open('https://polymarket.com/profile/${w.addr}')">${name}</td><td class="mono" style="color:var(--up);font-weight:700">${w.wr}%</td><td class="mono">$${w.portfolio!==undefined?Math.round(w.portfolio).toLocaleString():'—'}</td><td class="mono">${w.rounds}</td><td>${isElite?'<span class="tag-elite">ELITE RETAIL</span>':'👤'}</td></tr>`;
   });
-}
-function selectCalStrat(id){selStratId=id;document.querySelectorAll('.cal-sb-item').forEach(el=>el.classList.toggle('on',el.dataset.id===(id||'none')));renderCalendar();}
-function filterSidebar(q){document.querySelectorAll('.cal-sb-item').forEach(el=>{const text=el.textContent.toLowerCase();el.style.display=!q||text.includes(q.toLowerCase())?'flex':'none';});}
-
-function calNav(d){if(d===0){calY=new Date().getFullYear();calM=new Date().getMonth();}else{calM+=d;if(calM>11){calM=0;calY++;}if(calM<0){calM=11;calY--;}}renderCalendar();}
-function renderCalendar(){
-  const mNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('cal-title').textContent=`${mNames[calM]} ${calY}`;
-  const dayMap={};const calData=G.calRounds.length?G.calRounds:G.rounds;
-  calData.forEach(r=>{const d=r.date;if(d.getFullYear()===calY&&d.getMonth()===calM){const k=d.getDate();if(!dayMap[k])dayMap[k]=[];dayMap[k].push(r);}});
-  let stratDayMap=null;
-  if(selStratId){
-    const s=G.strats.find(x=>x.id===selStratId);
-    if(s){stratDayMap={};s.trades.forEach(t=>{const d=t.date;if(d&&d.getFullYear()===calY&&d.getMonth()===calM){const k=d.getDate();if(!stratDayMap[k])stratDayMap[k]={wins:0,losses:0};if(t.result==='win')stratDayMap[k].wins++;else if(t.result==='loss')stratDayMap[k].losses++;}});}
-  }
-  const cells=document.getElementById('cal-cells');cells.innerHTML='';
-  const firstDay=new Date(calY,calM,1).getDay(),daysInMonth=new Date(calY,calM+1,0).getDate();
-  for(let i=0;i<firstDay;i++)cells.appendChild(document.createElement('div')).className='cc empty';
-  for(let day=1;day<=daysInMonth;day++){
-    const rounds=dayMap[day]||[],upW=rounds.filter(r=>r.oc==='UP').length,dnW=rounds.filter(r=>r.oc==='DOWN').length,sd=stratDayMap?stratDayMap[day]:null;
-    const el=document.createElement('div');el.className='cc'+(selDay===day?' sel':'')+(rounds.length===0?' no-data':'');
-    let html=`<div class="cc-day">${day}</div>`;
-    if(rounds.length){
-      html+=`<div class="cc-bars"><div class="cc-bar-up" style="flex:${upW}"></div><div class="cc-bar-dn" style="flex:${dnW}"></div></div>`;
-      html+=`<div class="cc-rounds">${rounds.slice(0,10).map(r=>`<div class="cc-r ${r.oc.toLowerCase()}"></div>`).join('')}</div>`;
-      html+=`<div class="cc-stats">↑${upW} ↓${dnW}</div>`;
-    }
-    if(sd){
-      const wr=Math.round(sd.wins/(sd.wins+sd.losses)*100)||0;
-      html+=`<div class="cc-strat ${wr>=50?'s-win':'s-loss'}">${wr}%</div>`;
-    }
-    el.innerHTML=html;el.onclick=()=>{selDay=day;renderCalendar();renderDayDetail(day,rounds,sd);};
-    cells.appendChild(el);
-  }
-}
-
-function renderDayDetail(day,rounds,sd){
-  const panel=document.getElementById('day-panel');
-  const upW=rounds.filter(r=>r.oc==='UP').length,dnW=rounds.filter(r=>r.oc==='DOWN').length;
-  let html=`<div class="day-panel">
-    <div class="dp-head"><div class="dp-title">${day} ${calM+1} ${calY}</div><div class="dp-summary">
-      <div class="dp-stat"><div class="dp-sv">${rounds.length}</div><div class="dp-sl">Rounds</div></div>
-      <div class="dp-stat"><div class="dp-sv" style="color:var(--up)">${upW}</div><div class="dp-sl">UP</div></div>
-      <div class="dp-stat"><div class="dp-sv" style="color:var(--dn)">${dnW}</div><div class="dp-sl">DOWN</div></div>
-    </div><button class="dp-close" onclick="selDay=null;renderCalendar();document.getElementById('day-panel').innerHTML=''">✕</button></div>
-    <div class="dp-rounds">${rounds.map(r=>`<div class="dp-round dpr-${r.oc.toLowerCase()}"><span>${r.date.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</span><span>↑${Math.round(r.uP*100)}¢</span></div>`).join('')}</div>
-  </div>`;
-  panel.innerHTML=html;
 }
 
 function renderBuckets(){
-  const bkts=[{l:'UP 50-60¢',min:.5,max:.6},{l:'UP 60-70¢',min:.6,max:.7},{l:'UP 70-80¢',min:.7,max:.8},{l:'UP 80-90¢',min:.8,max:.9},{l:'UP <50¢',min:0,max:.5}];
   const g=document.getElementById('bucket-grid');g.innerHTML='';
-  bkts.forEach(b=>{
-    const rs=G.rounds.filter(r=>r.uP>=b.min&&r.uP<b.max);if(!rs.length)return;
-    const uW=rs.filter(r=>r.oc==='UP').length,dW=rs.filter(r=>r.oc==='DOWN').length;
-    const c=document.createElement('div');c.className='bc';
-    c.innerHTML=`<div class="bc-head"><div class="bc-title">${b.l}</div><div>${rs.length}r</div></div><div class="bc-body">
-      <div style="display:flex;gap:8px;margin-bottom:10px">
-        <div style="flex:1;text-align:center"><div style="font-weight:700;color:var(--up)">${Math.round(uW/rs.length*100)}%</div><div style="font-size:9px">UP</div></div>
-        <div style="flex:1;text-align:center"><div style="font-weight:700;color:var(--dn)">${Math.round(dW/rs.length*100)}%</div><div style="font-size:9px">DOWN</div></div>
-      </div>
-    </div>`;
-    g.appendChild(c);
+  [0,.5,.6,.7,.8,.9].forEach(min=>{
+    const rs=G.rounds.filter(r=>r.upP>=min&&r.upP<(min===0?.5:min+.1));if(!rs.length)return;
+    const uW=rs.filter(r=>r.oc==='UP').length;
+    g.innerHTML+=`<div class="bc"><div class="bc-head"><div class="bc-title">${min*100}%+ UP</div><div>${rs.length}r</div></div><div class="bc-body"><div style="font-weight:700;color:var(--up);text-align:center">${Math.round(uW/rs.length*100)}% Win</div></div></div>`;
   });
 }
 
-function sw(id,btn){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));document.getElementById('tab-'+id).classList.add('on');btn.classList.add('on');if(id==='calendar')renderCalendar();if(id==='buckets')renderBuckets();if(id==='wallets')renderWallets();}
+function sw(id,btn){document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));document.querySelectorAll('.nt').forEach(t=>t.classList.remove('on'));document.getElementById('tab-'+id).classList.add('on');btn.classList.add('on');}
+function sf(f,b){stratFilter=f;document.querySelectorAll('#tab-strategies .btn').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderStrategies();}
+function ss(k,b){stratSort=k;document.querySelectorAll('#tab-strategies .btn').forEach(x=>x.classList.remove('on'));b.classList.add('on');renderStrategies();}
+function ws(k,b){wSort=k;if(b){document.querySelectorAll('#tab-wallets .btn').forEach(x=>x.classList.remove('on'));b.classList.add('on');}renderWallets();}
+
 function setStatus(t){document.getElementById('status').textContent=t;}
 function setP(p){document.getElementById('prog').style.width=p+'%';}
 

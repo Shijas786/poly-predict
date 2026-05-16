@@ -1,9 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const cron = require('node-cron');
 const { Pool } = require('pg');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+app.use(cors()); // Moved to top
+app.use(express.json());
+
+const PORT = process.env.PORT || 8080;
 const GAMMA = 'https://gamma-api.polymarket.com';
 
 // ── Postgres ──────────────────────────────────────────────────────────────────
@@ -30,10 +34,11 @@ async function initDB() {
 // ── In-memory cache for fast responses ───────────────────────────────────────
 let cache = { data: [], lastFetched: null, fetchCount: 0, status: 'initializing' };
 
-// ── CORS ─────────────────────────────────────────────────────────────────────
+// ── Manual CORS (Backup) ──────────────────────────────────────────────────────
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   if (req.method === 'OPTIONS') return res.sendStatus(204);
   next();
 });
@@ -41,12 +46,14 @@ app.use((req, res, next) => {
 // ── Fetch + persist new rounds ────────────────────────────────────────────────
 async function fetchAndStore() {
   try {
-    console.log(`[${new Date().toISOString()}] Syncing with Polymarket…`);
+    console.log(`[${new Date().toISOString()}] Fetching from: ${GAMMA}/events?series_slug=btc-updown-5m&closed=true&limit=100`);
     const resp = await fetch(
-      `${GAMMA}/events?series_slug=btc-up-or-down-5m&limit=500&order=endDate&ascending=false`
+      `${GAMMA}/events?series_slug=btc-updown-5m&closed=true&limit=100&order=endDate&ascending=false`,
+      { headers: { 'User-Agent': 'Mozilla/5.0' } }
     );
     if (!resp.ok) throw new Error(`Upstream ${resp.status}`);
     const events = await resp.json();
+    console.log(`[DEBUG] Received ${events.length} events from Polymarket`);
 
     // Filter only resolved rounds (one side must be > 0.9 or < 0.1)
     const resolved = events.filter(ev => {
