@@ -605,6 +605,87 @@ async function init(){
     }
   }catch{}
   
+  const RAILWAY_API = 'https://pp-pulse-api-production.up.railway.app';
+  try {
+    setStatus('Syncing with Railway DB Cache…');
+    const [dbRounds, dbWallets] = await Promise.all([
+      fetch(`${RAILWAY_API}/api/rounds?limit=150`).then(r => r.json()),
+      fetch(`${RAILWAY_API}/api/wallets?limit=250&min_rounds=1`).then(r => r.json())
+    ]);
+    
+    if (Array.isArray(dbRounds) && dbRounds.length > 0 && Array.isArray(dbWallets) && dbWallets.length > 0) {
+      console.log(`[INFO] Loaded ${dbRounds.length} rounds and ${dbWallets.length} wallets from Railway Cache API!`);
+      
+      G.rounds = dbRounds.map(r => ({
+        slug: r.slug,
+        oc: r.outcome,
+        upP: parseFloat(r.up_p) || 0.5,
+        ts: parseInt(r.ts),
+        date: new Date(r.ts * 1000),
+        uV: parseFloat(r.up_vol) || 0,
+        dV: parseFloat(r.dn_vol) || 0,
+        lU: parseFloat(r.late_up_vol) || 0,
+        lD: parseFloat(r.late_dn_vol) || 0,
+        vlU: parseFloat(r.late_up_vol) || 0,
+        vlD: parseFloat(r.late_dn_vol) || 0,
+        sU: 0, sD: 0,
+        earlyU: parseFloat(r.early_up_vol) || 0,
+        earlyD: parseFloat(r.early_dn_vol) || 0,
+        t10U: 0, t10D: 0, orU: 0, orD: 0, wCntU: 0, wCntD: 0, midU: 0, midD: 0,
+        uwU: parseInt(r.wallet_count) || 0,
+        uwD: parseInt(r.wallet_count) || 0
+      }));
+      
+      const walletsMap = {};
+      dbWallets.forEach(w => {
+        walletsMap[w.wallet] = {
+          addr: w.wallet,
+          name: w.name || null,
+          wins: parseInt(w.wins) || 0,
+          losses: parseInt(w.losses) || 0,
+          rounds: parseInt(w.rounds) || 0,
+          wr: parseFloat(w.wr) || 0,
+          vol: parseFloat(w.total_vol) || 0,
+          pnl: parseFloat(w.pnl) || 0,
+          avgSize: parseFloat(w.total_vol) / (parseInt(w.rounds) || 1),
+          avgTiming: parseFloat(w.avg_entry) || 150,
+          lateWr: parseFloat(w.late_wr) || 0,
+          lateR: parseFloat(w.late_total_vol) > 0 ? 3 : 0,
+          byPrice: typeof w.by_price === 'string' ? JSON.parse(w.by_price) : (w.by_price || {}),
+          portfolio: w.portfolio !== undefined ? parseFloat(w.portfolio) : undefined
+        };
+      });
+      G.wallets = walletsMap;
+      
+      const outs = G.rounds.map(r => r.oc);
+      G.strats = STRATS.map(st => {
+        const trades = [];
+        G.rounds.forEach((r, i) => {
+          const prev = outs.slice(0, i), sig = st.sig(r, prev, G.rounds.slice(0, i));
+          const result = sig === null ? 'skip' : sig === r.oc ? 'win' : 'loss';
+          trades.push({ time: r.date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), date: r.date, sig, oc: r.oc, result, uP: r.upP });
+        });
+        const s = trades.filter(t => t.result !== 'skip'), w = s.filter(t => t.result === 'win').length;
+        const wr = s.length ? Math.round(w / s.length * 100) : 0;
+        return { ...st, trades, wins: w, losses: s.length - w, signals: s.length, wr, tier: wr >= 75 ? 'S' : wr >= 62 ? 'A' : wr >= 50 ? 'B' : 'C' };
+      });
+      
+      const best = Math.max(...G.strats.map(s => s.wr));
+      document.getElementById('k-r').textContent = G.rounds.length;
+      document.getElementById('k-w').textContent = Object.keys(G.wallets).length;
+      document.getElementById('k-b').textContent = best + '%';
+      document.getElementById('k-s').textContent = G.strats.length;
+      
+      setP(100); setStatus(`✅ From Railway DB · ${G.rounds.length} rounds · ${Object.keys(G.wallets).length} wallets · ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`);
+      renderStrategies(); renderWallets(); renderCalendar(); buildCalSidebar(); renderBuckets();
+      
+      try { sessionStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), data: G })); } catch {}
+      return;
+    }
+  } catch (err) {
+    console.warn('[WARN] Railway Cache API failed, falling back to direct Polymarket fetches:', err);
+  }
+  
   setStatus('Fetching resolved rounds…');setP(0);
   const evs=await fetch(`${GA}/events?series_slug=btc-up-or-down-5m&closed=true&limit=100&order=endDate&ascending=false`).then(r=>r.json()).catch(()=>[]);
   const res=evs.filter(ev=>{
