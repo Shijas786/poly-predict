@@ -3,7 +3,7 @@ const GAMMA = 'https://gamma-api.polymarket.com';
 export default async function handler(req, res) {
   try {
     const resp = await fetch(
-      `${GAMMA}/events?series_slug=btc-up-or-down-5m&limit=500&order=startDate&ascending=false`,
+      `${GAMMA}/events?series_slug=btc-up-or-down-5m&limit=60&order=startDate&ascending=false&closed=true`,
       { headers: { 'Accept': 'application/json' } }
     );
 

@@ -169,7 +169,8 @@ tr:last-child td{border-bottom:none}
 
 <script>
 const RAILWAY_API='https://pp-pulse-api-production.up.railway.app';
-const DA='https://data-api.polymarket.com',GA='https://gamma-api.polymarket.com';
+const DA = window.location.hostname.includes('vercel') || window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? '/api' : 'https://data-api.polymarket.com';
+const GA='https://gamma-api.polymarket.com';
 
 let G={wallets:{},rounds:[],strats:[]};
 let stratSort='wr',stratFilter=null,expId=null;
@@ -295,11 +296,11 @@ async function buildWallets(evs){
   await Promise.all(evs.map(async ev=>{
     try{
       const m=ev.markets?.[0];if(!m)return;
-      const prices=JSON.parse(m.outcomePrices||'[]');
+      const prices=JSON.parse(ev.outcomePrices||m.outcomePrices||'[]');
       let oc=prices[0]>.9?'UP':prices[1]>.9?'DOWN':null;
       if(!oc)return;
       const slug=ev.slug,rTs=parseInt(slug.split('-').pop())||0;
-      const trades=await fetch(`${DA}/trades?market=${slug}&limit=400&_=${Date.now()}`).then(r=>r.json()).catch(()=>[]);
+      const trades=await fetch(`${DA}/trades?market=${m.conditionId}&limit=400&_=${Date.now()}`).then(r=>r.json()).catch(()=>[]);
       if(!Array.isArray(trades))return;
       trades.filter(t=>t.side==='BUY').forEach(t=>{
         const addr=t.proxyWallet||'';if(!addr)return;
@@ -320,7 +321,7 @@ async function fetchRound(ev,W){
   try{
     const m=ev.markets?.[0];if(!m)return null;
     const condId=m.conditionId; if(!condId) return null;
-    const prices=JSON.parse(m.outcomePrices||'[]');
+    const prices=JSON.parse(ev.outcomePrices||m.outcomePrices||'[]');
     let oc=prices[0]>.9?'UP':prices[1]>.9?'DOWN':null;if(!oc)return null;
     const uP=parseFloat(prices[0])||.5,slug=ev.slug,rTs=parseInt(slug.split('-').pop())||0,rEnd=rTs+300;
     const t60=rEnd-60,t30=rEnd-30,t45=rTs+45,t90=rTs+90,t210=rTs+210;
@@ -350,7 +351,7 @@ async function fetchPortfolios(wallets) {
   await Promise.all(top.map(async w => {
     try {
       const resp = await fetch(`${DA}/value?user=${w.addr}`);
-      if (resp.ok) { const data = await resp.json(); w.portfolio = data.value || 0; }
+      if (resp.ok) { const data = await resp.json(); w.portfolio = Array.isArray(data) ? data[0]?.value : (data.value || 0); }
     } catch(e) {}
     done++; setStatus(`Syncing portfolios: ${Math.round(done/top.length*100)}%`);
   }));
@@ -365,9 +366,9 @@ async function init(){
     console.error('Railway fetch failed:', e);
     setStatus('⚠️ Railway API Offline (CORS or Down)');
   }
-  const liveEvs=await fetch(`${GA}/events?series_slug=btc-updown-5m&closed=true&limit=100&order=endDate&ascending=false`).then(r=>r.json()).catch(()=>[]);
+  const liveEvs=await fetch(`${GA}/events?series_slug=btc-up-or-down-5m&closed=true&limit=100&order=endDate&ascending=false`).then(r=>r.json()).catch(()=>[]);
   if(!liveEvs.length) { setStatus('❌ No rounds found on Polymarket API'); return; }
-  const liveRes=liveEvs.filter(ev=>{const m=ev.markets?.[0];if(!m)return false;const p=JSON.parse(m.outcomePrices||'[]');return p[0]>.9||p[1]>.9;}).slice(0,80);
+  const liveRes=liveEvs.filter(ev=>{const p=JSON.parse(ev.outcomePrices||ev.markets?.[0]?.outcomePrices||'[]');return p[0]>.9||p[1]>.9;}).slice(0,80);
   const wc=await buildWallets(liveRes); G.wallets=wc;
   const rs=[]; for(let i=0;i<liveRes.length;i++){const r=await fetchRound(liveRes[i],wc);if(r)rs.push(r);setP(40+(i/liveRes.length*40));}
   G.rounds=rs.sort((a,b)=>a.ts-b.ts);
