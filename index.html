@@ -313,6 +313,14 @@ pre{background:var(--tx);color:#e2e8f0;padding:10px 14px;border-radius:6px;font-
 <!-- WALLETS -->
 <div class="sec" id="tab-wallets">
   <div class="info"><b>Wallet Intelligence:</b> Ranked by on-chain performance. Filter by price range to find specialists at each market condition. 🔮 Oracle wallets win 70%+ in the final 60 seconds.</div>
+  
+  <div class="info" style="background:var(--dn-l);border:1px dashed var(--dn);color:var(--dn);margin-bottom:12px;display:flex;align-items:center;gap:10px">
+    <span style="font-size:16px">⚠️</span>
+    <div>
+      <strong>Data Quality Notice:</strong> Historical rounds collected after resolution contain post-settlement redemption transfers. These appear as highly latent trades (e.g., <strong>Post-round 705s</strong>). The newly deployed <strong>V2 Collector</strong> polls active rounds in real-time to fully eliminate these anomalies.
+    </div>
+  </div>
+
   <div class="tb">
     <span class="tbl">Price:</span>
     <button class="btn on" onclick="wp(0,1,this)">All</button>
@@ -337,7 +345,7 @@ pre{background:var(--tx);color:#e2e8f0;padding:10px 14px;border-radius:6px;font-
   <div class="table-wrap"><table>
     <thead><tr>
       <th>#</th><th>Wallet / Name</th><th onclick="ws('wr')">Win Rate</th><th onclick="ws('portfolio')">Portfolio</th><th onclick="ws('pnl')">Est. PnL</th>
-      <th>Rounds</th><th onclick="ws('size')">Avg $</th><th onclick="ws('late')">Entry Timing</th>
+      <th>Rounds</th><th>W / L</th><th onclick="ws('size')">Avg $</th><th onclick="ws('late')">Entry Timing</th>
       <th>Late WR (60s)</th><th>Side</th><th>Type</th>
     </tr></thead>
     <tbody id="wtbody"></tbody>
@@ -1004,8 +1012,9 @@ function renderWallets(){
     const {wr:dWR,r:dR}=getWR();
     const wCol=dWR>=70?'var(--up)':dWR>=55?'var(--go)':'var(--tx3)';
     const pCol=w.pnl>0?'var(--up)':'var(--dn)';
-    const tLbl=w.avgTiming<60?'⚡ Early':w.avgTiming<180?'— Mid':'🎯 Late';
-    const tCol=w.avgTiming>180?'var(--up)':w.avgTiming<60?'var(--dn)':'var(--tx2)';
+    const isPost=w.avgTiming>300;
+    const tLbl=isPost?'⚠️ Post-round':w.avgTiming<60?'⚡ Early':w.avgTiming<180?'— Mid':'🎯 Late';
+    const tCol=isPost?'var(--dn)':w.avgTiming>180?'var(--up)':w.avgTiming<60?'var(--dn)':'var(--tx2)';
     const name=w.name||w.addr.slice(0,6)+'…'+w.addr.slice(-4);
     const isOr=w.lateWr>=65&&w.lateR>=3,isMn=w.avgTiming<60&&w.wr>=55&&w.rounds>=5;
     const isElite=w.portfolio!==undefined&&w.portfolio<20000&&w.wr>=60;
@@ -1017,6 +1026,7 @@ function renderWallets(){
       <td class="mono">$${w.portfolio!==undefined?Math.round(w.portfolio).toLocaleString():'—'}</td>
       <td class="mono" style="color:${pCol};font-weight:600">${w.pnl>0?'+':''}$${Math.round(w.pnl)}</td>
       <td class="mono">${w.rounds}</td>
+      <td class="mono" style="color:var(--tx2);font-size:11px">${w.wins}W · ${w.losses}L</td>
       <td class="mono">$${Math.round(w.avgSize)}</td>
       <td style="color:${tCol}">${tLbl} <span style="font-family:var(--mono);font-size:9px;color:var(--tx3)">${w.avgTiming}s</span></td>
       <td class="mono" style="color:${w.lateWr>=65?'var(--up)':'var(--tx3)'}">${w.lateR>0?w.lateWr+'%':'—'}</td>
